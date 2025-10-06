@@ -185,6 +185,8 @@ binds {
 
     XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
     XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
+    Mod+F9 allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
+    Mod+F8 allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
 
     Mod+O repeat=false { toggle-overview; }
 
