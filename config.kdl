@@ -1,0 +1,354 @@
+// This config is in the KDL format: https://kdl.dev
+// "/-" comments out the following node.
+// Check the wiki for a full description of the configuration:
+// https://yalter.github.io/niri/Configuration:-Introduction
+// Defaults at https://github.com/YaLTeR/niri/blob/main/resources/default-config.kdl
+
+// Input device configuration.
+// Find the full list of options on the wiki:
+// https://yalter.github.io/niri/Configuration:-Input
+input {
+    keyboard {
+        xkb {
+        }
+        // Enable numlock on startup, omitting this setting disables it.
+        // numlock
+    }
+
+    touchpad {
+        // off
+        // tap
+        dwt
+        // natural-scroll
+    }
+
+    mouse {
+    }
+
+    trackpoint {
+    }
+
+    // Focus windows and outputs automatically when moving the mouse into them.
+    // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
+    // focus-follows-mouse max-scroll-amount="0%"
+    focus-follows-mouse
+
+    mod-key "Super"
+}
+
+output "eDP-1" {
+    mode "1920x1080@143.998"
+}
+
+output "U28E850" {
+    mode "3840x2160@60.000"
+    scale 1.5
+}
+
+// Settings that influence how windows are positioned and sized.
+// Find more information on the wiki:
+// https://yalter.github.io/niri/Configuration:-Layout
+layout {
+    // Set gaps around windows in logical pixels.
+    gaps 0
+
+    center-focused-column "never"
+
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+
+    preset-window-heights {
+        proportion 0.25
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+        proportion 1.0
+    }
+
+    default-column-width { proportion 0.5; }
+
+    focus-ring {
+        off
+    }
+
+    border {
+        width 2
+        active-color "#ffc87f"
+        inactive-color "#505050"
+
+        // Color of the border around windows that request your attention.
+        urgent-color "#9b0000"
+
+        // Gradients can use a few different interpolation color spaces.
+        // For example, this is a pastel rainbow gradient via in="oklch longer hue".
+        //
+        // active-gradient from="#e5989b" to="#ffb4a2" angle=45 relative-to="workspace-view" in="oklch longer hue"
+
+        // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
+    }
+
+    shadow {
+    }
+
+    struts {
+    }
+}
+
+spawn-sh-at-startup "/usr/bin/ulauncher --hide-window 1"
+spawn-at-startup "/usr/local/bin/mako"
+//spawn-at-startup "/usr/bin/swaybg -m fill -i '%h/Pictures/LakeSide.png'"
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+// ask clients to omit their client-side decorations if possible (rounded corners etc)
+prefer-no-csd
+
+// You can change the path where screenshots are saved.
+// A ~ at the front will be expanded to the home directory.
+// The path is formatted with strftime(3) to give you the screenshot date and time.
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+// You can also set this to null to disable saving screenshots to disk.
+// screenshot-path null
+
+// The wiki explains how to configure individual animations:
+// https://yalter.github.io/niri/Configuration:-Animations
+animations {
+    // Uncomment to turn off all animations.
+    // off
+
+    // Slow down all animations by this factor. Values below 1 speed them up instead.
+    slowdown 0.6
+}
+
+// Window rules let you adjust behavior for individual windows.
+// Find more information on the wiki:
+// https://yalter.github.io/niri/Configuration:-Window-Rules
+
+// Open the Firefox & Waterfox picture-in-picture player as floating by default.
+window-rule {
+    // This app-id regular expression will work for both:
+    // - host Firefox (app-id is "firefox")
+    // - Flatpak Firefox (app-id is "org.mozilla.firefox")
+    match app-id=r#"(fire|water)fox$"# title="^Picture-in-Picture$"
+    open-floating true
+}
+
+gestures {
+    hot-corners {
+        off
+    }
+}
+
+switch-events {
+    lid-close { spawn "systemctl" "suspend" "-i"; }
+}
+
+binds {
+    // To find an XKB name for a particular key, you may use a program like wev.
+
+    // Most actions that you can bind here can also be invoked programmatically with
+    // `niri msg action do-something`.
+
+    Mod+Shift+Slash { show-hotkey-overlay; }
+
+    Mod+Return hotkey-overlay-title="Open a Terminal: gnome-terminal" { spawn "gnome-terminal"; }
+    Mod+D hotkey-overlay-title="Run an Application: ulauncher" { spawn "ulauncher-toggle"; }
+    Mod+Shift+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+
+    Mod+Shift+Pause hotkey-overlay-title="Suspend" { spawn "systemctl" "suspend" "-i"; }
+    Mod+Shift+Insert hotkey-overlay-title="Reboot" { spawn "systemctl" "reboot"; }
+    Mod+Shift+Delete hotkey-overlay-title="Shutdown" { spawn "systemctl" "poweroff"; }
+    // The quit action will show a confirmation dialog to avoid accidental exits.
+    Mod+Shift+E { quit; }
+    Ctrl+Alt+Delete { quit; }
+
+    // XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
+    // XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
+    // XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
+    // XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "pactl set-sink-volume @DEFAULT_SINK@ +5% && killall -SIGUSR1 i3status; exec play -q /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "pactl set-sink-volume @DEFAULT_SINK@ -5% && killall -SIGUSR1 i3status; exec play -q /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga"; }
+    XF86AudioMute        allow-when-locked=true { spawn-sh "pactl set-sink-mute @DEFAULT_SINK@ toggle; exec play -q /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga"; }
+    // XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+
+    XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
+    XF86AudioPause        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
+    XF86AudioStop        allow-when-locked=true { spawn-sh "playerctl stop"; }
+    XF86AudioPrev        allow-when-locked=true { spawn-sh "playerctl previous"; }
+    XF86AudioNext        allow-when-locked=true { spawn-sh "playerctl next"; }
+
+    XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
+
+    Mod+O repeat=false { toggle-overview; }
+
+    Mod+Q repeat=false { close-window; }
+    Alt+F4 repeat=false { close-window; }
+
+    Mod+Down     { focus-window-or-workspace-down; }
+    Mod+Up       { focus-window-or-workspace-up; }
+    Mod+Left  { focus-column-left; }
+    Mod+Right { focus-column-right; }
+
+    Mod+Ctrl+Down  { move-window-down-or-to-workspace-down; }
+    Mod+Ctrl+Up    { move-window-up-or-to-workspace-up; }
+    Mod+Ctrl+Left  { move-column-left; }
+    Mod+Ctrl+Right { move-column-right; }
+
+    Mod+Home { focus-column-first; }
+    Mod+End  { focus-column-last; }
+    Mod+Shift+Home { move-column-to-first; }
+    Mod+Shift+End  { move-column-to-last; }
+
+    Ctrl+Alt+Left  { focus-monitor-left; }
+    Ctrl+Alt+Down  { focus-monitor-down; }
+    Ctrl+Alt+Up    { focus-monitor-up; }
+    Ctrl+Alt+Right { focus-monitor-right; }
+
+    Ctrl+Alt+Shift+Left  { move-column-to-monitor-left; }
+    Ctrl+Alt+Shift+Down  { move-column-to-monitor-down; }
+    Ctrl+Alt+Shift+Up    { move-column-to-monitor-up; }
+    Ctrl+Alt+Shift+Right { move-column-to-monitor-right; }
+
+    Mod+Ctrl+Shift+Left  { move-window-to-monitor-left; }
+    Mod+Ctrl+Shift+Down  { move-window-to-monitor-down; }
+    Mod+Ctrl+Shift+Up    { move-window-to-monitor-up; }
+    Mod+Ctrl+Shift+Right { move-window-to-monitor-right; }
+
+    Mod+Shift+Ctrl+Alt+Left  { move-workspace-to-monitor-left; }
+    Mod+Shift+Ctrl+Alt+Right  { move-workspace-to-monitor-right; }
+    Mod+Shift+Ctrl+Alt+Up  { move-workspace-to-monitor-up; }
+    Mod+Shift+Ctrl+Alt+Down  { move-workspace-to-monitor-down; }
+
+    Mod+Page_Down      { focus-workspace-down; }
+    Mod+Page_Up        { focus-workspace-up; }
+    Mod+Ctrl+Page_Down { move-column-to-workspace-down; }
+    Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
+
+    Mod+Ctrl+Shift+Page_Down { move-window-to-workspace-down; }
+    Mod+Ctrl+Shift+Page_Up   { move-window-to-workspace-up; }
+
+    Mod+Shift+Page_Down { move-workspace-down; }
+    Mod+Shift+Page_Up   { move-workspace-up; }
+
+    Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
+    Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
+
+    Mod+Ctrl+WheelScrollDown      { focus-column-right; }
+    Mod+Ctrl+WheelScrollUp        { focus-column-left; }
+    Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
+    Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
+
+    Mod+1 { focus-workspace 1; }
+    Mod+2 { focus-workspace 2; }
+    Mod+3 { focus-workspace 3; }
+    Mod+4 { focus-workspace 4; }
+    Mod+5 { focus-workspace 5; }
+    Mod+6 { focus-workspace 6; }
+    Mod+7 { focus-workspace 7; }
+    Mod+8 { focus-workspace 8; }
+    Mod+9 { focus-workspace 9; }
+    Mod+Ctrl+1 { move-column-to-workspace 1; }
+    Mod+Ctrl+2 { move-column-to-workspace 2; }
+    Mod+Ctrl+3 { move-column-to-workspace 3; }
+    Mod+Ctrl+4 { move-column-to-workspace 4; }
+    Mod+Ctrl+5 { move-column-to-workspace 5; }
+    Mod+Ctrl+6 { move-column-to-workspace 6; }
+    Mod+Ctrl+7 { move-column-to-workspace 7; }
+    Mod+Ctrl+8 { move-column-to-workspace 8; }
+    Mod+Ctrl+9 { move-column-to-workspace 9; }
+    Mod+Ctrl+Shift+1 { move-window-to-workspace 1; }
+    Mod+Ctrl+Shift+2 { move-window-to-workspace 2; }
+    Mod+Ctrl+Shift+3 { move-window-to-workspace 3; }
+    Mod+Ctrl+Shift+4 { move-window-to-workspace 4; }
+    Mod+Ctrl+Shift+5 { move-window-to-workspace 5; }
+    Mod+Ctrl+Shift+6 { move-window-to-workspace 6; }
+    Mod+Ctrl+Shift+7 { move-window-to-workspace 7; }
+    Mod+Ctrl+Shift+8 { move-window-to-workspace 8; }
+    Mod+Ctrl+Shift+9 { move-window-to-workspace 9; }
+
+    // Switches focus between the current and the previous workspace.
+    // Mod+Tab { focus-workspace-previous; }
+
+    // The following binds move the focused window in and out of a column.
+    // If the window is alone, they will consume it into the nearby column to the side.
+    // If the window is already in a column, they will expel it out.
+    Mod+BracketLeft  { consume-or-expel-window-left; }
+    Mod+BracketRight { consume-or-expel-window-right; }
+    // Consume one window from the right to the bottom of the focused column.
+    Mod+Comma  { consume-window-into-column; }
+    // Expel the bottom window from the focused column to the right.
+    Mod+Period { expel-window-from-column; }
+
+    Mod+R { switch-preset-column-width; }
+    // Cycling through the presets in reverse order is also possible.
+    // Mod+R { switch-preset-column-width-back; }
+    Mod+Shift+R { switch-preset-window-height; }
+    Mod+Ctrl+R { reset-window-height; }
+    Mod+F { maximize-column; }
+    Mod+Shift+F { fullscreen-window; }
+
+    // Expand the focused column to space not taken up by other fully visible columns.
+    // Makes the column "fill the rest of the space".
+    Mod+Ctrl+F { expand-column-to-available-width; }
+
+    Mod+C { center-column; }
+
+    // Center all fully visible columns on screen.
+    Mod+Ctrl+C { center-visible-columns; }
+
+    // This command can also:
+    // * set width in pixels: "1000"
+    // * adjust width in pixels: "-5" or "+5"
+    // * set width as a percentage of screen width: "25%"
+    // * adjust width as a percentage of screen width: "-10%" or "+10%"
+    // Pixel sizes use logical, or scaled, pixels. I.e. on an output with scale 2.0,
+    // set-column-width "100" will make the column occupy 200 physical screen pixels.
+    Mod+Minus { set-column-width "-10%"; }
+    Mod+Equal { set-column-width "+10%"; }
+
+    // Finer height adjustments when in column with other windows.
+    Mod+Shift+Minus { set-window-height "-10%"; }
+    Mod+Shift+Equal { set-window-height "+10%"; }
+
+    // Move the focused window between the floating and the tiling layout.
+    Mod+V       { toggle-window-floating; }
+    Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+
+    // Toggle tabbed column display mode.
+    // Windows in this column will appear as vertical tabs,
+    // rather than stacked on top of each other.
+    Mod+W { toggle-column-tabbed-display; }
+
+    // Actions to switch layouts.
+    // Note: if you uncomment these, make sure you do NOT have
+    // a matching layout switch hotkey configured in xkb options above.
+    // Having both at once on the same hotkey will break the switching,
+    // since it will switch twice upon pressing the hotkey (once by xkb, once by niri).
+    // Mod+Space       { switch-layout "next"; }
+    // Mod+Shift+Space { switch-layout "prev"; }
+
+    Print { screenshot; }
+    Ctrl+Print { screenshot-screen; }
+    Alt+Print { screenshot-window; }
+
+    // Applications such as remote-desktop clients and software KVM switches may
+    // request that niri stops processing the keyboard shortcuts defined here
+    // so they may, for example, forward the key presses as-is to a remote machine.
+    // It's a good idea to bind an escape hatch to toggle the inhibitor,
+    // so a buggy application can't hold your session hostage.
+    //
+    // The allow-inhibiting=false property can be applied to other binds as well,
+    // which ensures niri always processes them, even when an inhibitor is active.
+    Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+
+    // Powers off the monitors. To turn them back on, do any input like
+    // moving the mouse or pressing any other key.
+    Mod+Shift+P { power-off-monitors; }
+}
