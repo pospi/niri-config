@@ -1,0 +1,140 @@
+# Workstation configuration for [Niri](https://yalter.github.io/niri/) window manager
+
+## Features & integrations
+
+- [ULauncher](https://ulauncher.io/) for app launching
+- [Mako](https://github.com/emersion/mako) for desktop notifications
+- [Waybar](https://github.com/Alexays/Waybar) for system tray
+- Suspend / reboot / poweroff commands with confirmation (using [Sway](https://swaywm.org/)'s `swaynag` command)
+- Automatic suspend when laptop lid closed
+- Quick access to peripherals config via popup menu
+- Media hotkeys, LCD backlight adjustment & volume controls all work
+- A reasonably intuitive set of custom keybindings
+
+## Full setup instructions
+
+These commands presume a freshly installed system running Ubuntu 22.04 LTS (or derivative such as Pop!OS 22.04). On more recent versions you may not need some dependencies, and on other distros you will need to adapt to your preferred package manager.
+
+```bash
+# base utilities
+
+sudo apt install -y python3-launchpadlib # provides `add-apt-repository`
+sudo apt install -y git git-lfs # to clone various repos
+
+# enable Wayland in GDM3 config
+sudo sed -i -e 's/WaylandEnable=false/WaylandEnable=true/' /etc/gdm3/custom.conf
+
+# install system dependencies for compiling Niri
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 6ED0E7B82643E131 78DBA3BC47EF2265
+echo 'deb http://deb.debian.org/debian bookworm-backports main contrib' | sudo tee /etc/apt/sources.list.d/debian-backports.list
+sudo apt update
+sudo apt install -y gcc clang libudev-dev libgbm-dev libxkbcommon-dev libegl1-mesa-dev libwayland-dev libdbus-1-dev libsystemd-dev libseat-dev libpipewire-0.3-dev libpango1.0-dev libdisplay-info-dev
+
+# get a Rust toolchain installed
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  # [follow installer prompts]
+. "$HOME/.cargo/env"
+
+pushd ~/Downloads
+  # libinput-dev is outdated & needs manual compilation,
+  # but ideally could be installed from `bookworm-backports` above
+  sudo apt install -y meson ninja-build libev-dev libevdev-dev libmtdev-dev libwacom-dev libgtk-3-dev
+  git clone https://gitlab.freedesktop.org/libinput/libinput
+  pushd libinput
+    git checkout 1.29.1
+    meson setup --prefix=/usr builddir/
+    ninja -C builddir/
+    sudo ninja -C builddir/ install
+  popd
+
+  # build Niri window manager
+  git clone https://github.com/YaLTeR/niri.git
+  pushd niri
+    git checkout v25.08
+    cargo build --release
+
+    sudo cp target/release/niri   /usr/local/bin/
+    sudo cp resources/niri-session  /usr/local/bin/
+    sudo mkdir /usr/local/share/wayland-sessions/
+    sudo cp resources/niri.desktop  /usr/local/share/wayland-sessions/
+    sudo mkdir /usr/local/share/xdg-desktop-portal/
+    sudo cp resources/niri-portals.conf   /usr/local/share/xdg-desktop-portal/
+    sed -i -e 's@/usr/bin/niri@/usr/local/bin/niri@' resources/niri.service
+    sudo cp resources/niri.service /etc/systemd/user/
+    sudo cp resources/niri-shutdown.target /etc/systemd/user/
+  popd
+
+  # build notifications daemon
+  sudo apt install -y scdoc
+  git clone https://github.com/emersion/mako.git
+  pushd mako
+    git checkout v1.10.0
+    meson build
+    ninja -C build
+    sudo cp build/mako* /usr/local/bin/
+  popd
+popd
+
+# base rendering
+sudo apt install -y xdg-desktop-portal-gtk xdg-desktop-portal-gnome gnome-keyring
+# privilege escalation helper
+sudo apt-get install -y polkit-kde-agent-1
+# used for `swaynag` confirmation helper
+sudo apt install -y sway
+# desktop background, idle watching & locking
+sudo apt install -y swaybg swayidle swaylock
+# trigger notifications via shell
+sudo apt install -y libnotify-bin
+
+# system tray (Waybar)
+sudo apt install -y waybar
+sudo apt install -y fonts-font-awesome fonts-fork-awesome  # font dependency
+
+# app launcher
+sudo add-apt-repository ppa:agornostal/ulauncher -y
+sudo apt update
+sudo apt install -y ulauncher
+# [install extensions through settings UI:]
+#   - https://github.com/Ulauncher/ulauncher-emoji
+
+# integrate idle handling
+echo '[Unit]
+PartOf=graphical-session.target
+After=graphical-session.target
+Requisite=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/swayidle -w timeout 601 'niri msg action power-off-monitors' timeout 600 'swaylock -f' before-sleep 'swaylock -f'
+Restart=on-failure' | tee "$HOME/.config/systemd/user/swayidle.service"
+systemctl --user daemon-reload
+systemctl --user add-wants niri.service swayidle.service
+
+# peripherals config utils
+sudo apt install -y wdisplays brightnessctl blueman pavucontrol
+sudo usermod -aG video $USER  # to allow brightnessctl setting
+```
+
+
+## Scheduler for System76 hardware
+
+There is a handy little script for owners of such machines that raises the priority of the foreground window to give it CPU priority. It's already configured as a start script in the configuration (it'll just fail silently if not present). You can set it up with these commands:
+
+```bash
+pushd ~/Downloads
+  git clone https://github.com/Kirottu/system76-scheduler-niri.git
+  pushd system76-scheduler-niri
+    cargo install --path .
+  popd
+popd
+```
+
+## To-do
+
+- Replace `swaylock` & make the lockscreen work. (Need to find an alternative, it's throwing "Compositor does not support the input inhibitor protocol".)
+- Get an app switcher working (see [here](https://github.com/Kiki-Bouba-Team/niri-switch/issues/14) and [here](https://github.com/isaksamsten/niriswitcher/issues/2))
+- Useful Waybar extensions
+- `xwayland-satellite` for X compatibility
+
+## License
+
+WTFPL
