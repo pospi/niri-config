@@ -162,9 +162,25 @@ binds {
     Mod+D hotkey-overlay-title="Run an Application: ulauncher" { spawn "ulauncher-toggle"; }
     Mod+Shift+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
-    Mod+Shift+Pause hotkey-overlay-title="Suspend" { spawn "systemctl" "suspend" "-i"; }
-    Mod+Shift+Insert hotkey-overlay-title="Reboot" { spawn "systemctl" "reboot"; }
-    Mod+Shift+Delete hotkey-overlay-title="Shutdown" { spawn "systemctl" "poweroff"; }
+    Mod+Shift+2 hotkey-overlay-title="Run an Application: File browser" { spawn "nautilus"; }
+    Mod+Shift+3 hotkey-overlay-title="Run an Application: Sublime Text" { spawn "subl"; }
+    Mod+Shift+4 hotkey-overlay-title="Run an Application: Waterfox" { spawn "waterfox"; }
+    Mod+Shift+5 hotkey-overlay-title="Run an Application: Rhythmbox" { spawn "rhythmbox"; }
+    Mod+Shift+0 hotkey-overlay-title="Run an Application: Logseq" { spawn "Logseq"; }
+
+    Mod+Shift+P hotkey-overlay-title="Peripherals" {
+        spawn-sh "swaynag --background 3cfcdf --text 000000 --button-background 027571 --button-text FFFFFF --border 015b58 -y overlay -m 'Peripherals:' -Z 'Bluetooth' 'blueman-manager' -Z 'Audio' 'pavucontrol' -Z 'Video' 'wdisplays'";
+    }
+
+    Mod+Shift+Pause hotkey-overlay-title="Suspend" {
+        spawn-sh "swaynag -t warning -y overlay -m 'Do you really want to suspend?' -b 'Suspend' 'systemctl suspend -i'";
+    }
+    Mod+Shift+Insert hotkey-overlay-title="Reboot" {
+        spawn-sh "swaynag -t error -y overlay -m 'Do you really want to restart?' -b 'Reboot now' 'systemctl reboot'";
+    }
+    Mod+Shift+Delete hotkey-overlay-title="Shutdown" {
+        spawn-sh "swaynag -t error -y overlay -m 'Do you really want to shut down?' -b 'Power off' 'systemctl poweroff'";
+    }
     // The quit action will show a confirmation dialog to avoid accidental exits.
     Mod+Shift+E { quit; }
     Ctrl+Alt+Delete { quit; }
@@ -353,5 +369,5 @@ binds {
 
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
-    Mod+Shift+P { power-off-monitors; }
+    Mod+Ctrl+P { power-off-monitors; }
 }
