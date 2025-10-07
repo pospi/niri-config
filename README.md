@@ -124,6 +124,11 @@ systemctl --user add-wants niri.service swayidle.service
 # peripherals config utils
 sudo apt install -y wdisplays brightnessctl blueman pavucontrol
 sudo usermod -aG video $USER  # to allow brightnessctl setting
+
+
+# All done! Now complete setup by cloning & integrating this repo:
+git clone https://github.com/pospi/niri-config.git $HOME/.config/niri
+$HOME/.config/niri/install.sh
 ```
 
 
