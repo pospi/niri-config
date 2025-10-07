@@ -160,7 +160,7 @@ binds {
 
     Mod+Return hotkey-overlay-title="Open a Terminal: gnome-terminal" { spawn "gnome-terminal"; }
     Mod+D hotkey-overlay-title="Run an Application: ulauncher" { spawn "ulauncher-toggle"; }
-    Mod+Shift+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+    Mod+Ctrl+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
     Mod+Shift+2 hotkey-overlay-title="Run an Application: File browser" { spawn "nautilus"; }
     Mod+Shift+3 hotkey-overlay-title="Run an Application: Sublime Text" { spawn "subl"; }
@@ -168,21 +168,21 @@ binds {
     Mod+Shift+5 hotkey-overlay-title="Run an Application: Rhythmbox" { spawn "rhythmbox"; }
     Mod+Shift+0 hotkey-overlay-title="Run an Application: Logseq" { spawn "Logseq"; }
 
-    Mod+Shift+P hotkey-overlay-title="Peripherals" {
+    Mod+Ctrl+P hotkey-overlay-title="Peripherals" {
         spawn-sh "swaynag --background 3cfcdf --text 000000 --button-background 027571 --button-text FFFFFF --border 015b58 -y overlay -m 'Peripherals:' -Z 'Bluetooth' 'blueman-manager' -Z 'Audio' 'pavucontrol' -Z 'Video' 'wdisplays'";
     }
 
-    Mod+Shift+Pause hotkey-overlay-title="Suspend" {
+    Mod+Ctrl+Pause hotkey-overlay-title="Suspend" {
         spawn-sh "swaynag -t warning -y overlay -m 'Do you really want to suspend?' -Z 'Suspend' 'systemctl suspend -i'";
     }
-    Mod+Shift+Insert hotkey-overlay-title="Reboot" {
+    Mod+Ctrl+Insert hotkey-overlay-title="Reboot" {
         spawn-sh "swaynag -t error -y overlay -m 'Do you really want to restart?' -Z 'Reboot now' 'systemctl reboot'";
     }
-    Mod+Shift+Delete hotkey-overlay-title="Shutdown" {
+    Mod+Ctrl+Delete hotkey-overlay-title="Shutdown" {
         spawn-sh "swaynag -t error -y overlay -m 'Do you really want to shut down?' -Z 'Power off' 'systemctl poweroff'";
     }
     // The quit action will show a confirmation dialog to avoid accidental exits.
-    Mod+Shift+E { quit; }
+    Mod+Ctrl+W { quit; }
     Ctrl+Alt+Delete { quit; }
 
     // XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
@@ -306,10 +306,10 @@ binds {
     Mod+Period { expel-window-from-column; }
 
     Mod+R { switch-preset-column-width; }
-    // Cycling through the presets in reverse order is also possible.
-    // Mod+R { switch-preset-column-width-back; }
-    Mod+Shift+R { switch-preset-window-height; }
-    Mod+Ctrl+R { reset-window-height; }
+    Mod+Shift+R { switch-preset-column-width-back; }
+    Mod+E { switch-preset-window-height; }
+    Mod+Shift+E { switch-preset-window-height-back; }
+    Mod+Ctrl+E { reset-window-height; }
     Mod+F { maximize-column; }
     Mod+Shift+F { fullscreen-window; }
 
@@ -369,5 +369,5 @@ binds {
 
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
-    Mod+Ctrl+P { power-off-monitors; }
+    Mod+Alt+P { power-off-monitors; }
 }
