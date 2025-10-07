@@ -130,6 +130,22 @@ animations {
 // Window rules let you adjust behavior for individual windows.
 // Find more information on the wiki:
 // https://yalter.github.io/niri/Configuration:-Window-Rules
+//
+// To determine window attributes, run `niri msg windows` in a terminal.
+
+// disable focus border on the launcher
+window-rule {
+    match app-id=r#"^ulauncher$"#
+    border {
+        width 0
+    }
+}
+
+// small apps; floating windows
+window-rule {
+    match app-id=r#"^(gnome-calculator|protonvpn-app|MEGAsync)$"#
+    open-floating true
+}
 
 // Open the Firefox & Waterfox picture-in-picture player as floating by default.
 window-rule {
