@@ -73,6 +73,17 @@ pushd ~/Downloads
     ninja -C build
     sudo cp build/mako* /usr/local/bin/
   popd
+
+  # X11 compat layer
+  sudo apt install -y xcb libxcb-cursor-dev xwayland
+  git clone https://github.com/Supreeeme/xwayland-satellite.git
+  pushd xwayland-satellite
+    git checkout a9188e7
+    cargo build --release -F systemd
+
+    sudo cp target/release/xwayland-satellite     /usr/local/bin/
+    sudo cp resources/xwayland-satellite.service  /etc/systemd/user/
+  popd
 popd
 
 # base rendering
@@ -133,7 +144,6 @@ popd
 - Replace `swaylock` & make the lockscreen work. (Need to find an alternative, it's throwing "Compositor does not support the input inhibitor protocol".)
 - Get an app switcher working (see [here](https://github.com/Kiki-Bouba-Team/niri-switch/issues/14) and [here](https://github.com/isaksamsten/niriswitcher/issues/2))
 - Useful Waybar extensions
-- `xwayland-satellite` for X compatibility
 
 ## License
 
