@@ -20,9 +20,9 @@
         "idle_inhibitor",
         "pulseaudio",
         "network",
-        "power-profiles-daemon",
         "cpu",
         "memory",
+        "power-profiles-daemon",
         "temperature",
         "backlight",
         "battery",
@@ -77,7 +77,9 @@
     "clock": {
         // "timezone": "America/New_York",
         // "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
+        "interval": 10,
+        "format": "{:%Y-%m-%d %H:%M:%S}",
+        "tooltip": false
     },
     "cpu": {
         "format": "{usage}% ",
