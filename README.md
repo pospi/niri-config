@@ -84,6 +84,23 @@ pushd ~/Downloads
     sudo cp target/release/xwayland-satellite     /usr/local/bin/
     sudo cp resources/xwayland-satellite.service  /etc/systemd/user/
   popd
+
+  # system tray (Waybar)
+  # (compile from source to get latest version)
+  sudo apt install -y fonts-font-awesome fonts-fork-awesome  # font dependency
+  sudo apt install -y llibplayerctl-dev libpulse-dev \
+    clang-tidy gobject-introspection libdbusmenu-gtk3-dev libevdev-dev \
+    libfmt-dev libgirepository1.0-dev libgtk-3-dev libgtkmm-3.0-dev \
+    libinput-dev libjsoncpp-dev libmpdclient-dev libnl-3-dev libnl-genl-3-dev \
+    libsigc++-2.0-dev libspdlog-dev libwayland-dev scdoc upower \
+    libxkbregistry-devlibmpdclient-dev
+  git clone https://github.com/Alexays/Waybar
+  pushd Waybar
+    git checkout 0.14.0
+    meson setup build
+    ninja -C build
+    sudo ninja -C build install
+  popd
 popd
 
 # base rendering
@@ -96,10 +113,8 @@ sudo apt install -y sway
 sudo apt install -y swaybg swayidle swaylock
 # trigger notifications via shell
 sudo apt install -y libnotify-bin
-
-# system tray (Waybar)
-sudo apt install -y waybar
-sudo apt install -y fonts-font-awesome fonts-fork-awesome  # font dependency
+# media playback
+sudo apt install -y playerctl
 
 # app launcher
 sudo add-apt-repository ppa:agornostal/ulauncher -y

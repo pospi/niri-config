@@ -8,9 +8,8 @@
     "fixed-center": false,
     // Choose the order of the modules
     "modules-left": [
-        "sway/workspaces",
-        "sway/mode",
-        "sway/scratchpad",
+        "niri/workspaces",
+        "niri/window",
         "custom/media"
     ],
     "modules-center": [
@@ -32,22 +31,25 @@
         "tray"
     ],
     // Modules configuration
-    // "sway/workspaces": {
-    //     "disable-scroll": true,
-    //     "all-outputs": true,
-    //     "warp-on-scroll": false,
-    //     "format": "{name}: {icon}",
-    //     "format-icons": {
-    //         "1": "",
-    //         "2": "",
-    //         "3": "",
-    //         "4": "",
-    //         "5": "",
-    //         "urgent": "",
-    //         "focused": "",
-    //         "default": ""
-    //     }
-    // },
+    "niri/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            // Named workspaces
+            // (you need to configure them in niri)
+            // "chat": "<b></b>",
+
+            // Icons by state
+            "active": "",
+            "default": ""
+        }
+    },
+    "niri/window": {
+        "format": "{}",
+        "rewrite": {
+            "(.*) — Mozilla Firefox": "🌎 $1",
+            "(.*) — Waterfox": "🌎 $1"
+        }
+    },
     "keyboard-state": {
         "numlock": true,
         "capslock": true,
@@ -56,16 +58,6 @@
             "locked": "",
             "unlocked": ""
         }
-    },
-    "sway/mode": {
-        "format": "<span style=\"italic\">{}</span>"
-    },
-    "sway/scratchpad": {
-        "format": "{icon} {count}",
-        "show-empty": false,
-        "format-icons": ["", ""],
-        "tooltip": true,
-        "tooltip-format": "{app}: {title}"
     },
     "idle_inhibitor": {
         "format": "{icon}",

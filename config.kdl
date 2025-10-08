@@ -97,6 +97,7 @@ layout {
     }
 }
 
+spawn-at-startup "waybar"
 spawn-sh-at-startup "/usr/bin/ulauncher --hide-window 1"
 spawn-at-startup "/usr/local/bin/mako"
 //spawn-at-startup "/usr/bin/swaybg -m fill -i '%h/Pictures/LakeSide.png'"
