@@ -4,11 +4,12 @@
 
 - [ULauncher](https://ulauncher.io/) for app launching
 - [Mako](https://github.com/emersion/mako) for desktop notifications
-- [Waybar](https://github.com/Alexays/Waybar) for system tray
+- Latest [Waybar](https://github.com/Alexays/Waybar) for system tray (with Niri integrations)
 - Suspend / reboot / poweroff commands with confirmation (using [Sway](https://swaywm.org/)'s `swaynag` command)
 - Automatic suspend when laptop lid closed
 - Quick access to peripherals config via popup menu
-- Media hotkeys, LCD backlight adjustment & volume controls all work
+- [Playerctl](https://github.com/altdesktop/playerctl) to manage media hotkeys
+- LCD backlight adjustment & volume controls all work
 - A reasonably intuitive set of custom keybindings
 
 ## Full setup instructions
