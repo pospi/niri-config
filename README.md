@@ -4,7 +4,9 @@
 
 - [ULauncher](https://ulauncher.io/) for app launching
 - [Mako](https://github.com/emersion/mako) for desktop notifications
-- Latest [Waybar](https://github.com/Alexays/Waybar) for system tray (with Niri integrations)
+- Latest [Waybar](https://github.com/Alexays/Waybar) for system tray
+    - Active workspace and window indicators
+    - [Niri taskbar](https://github.com/LawnGnome/niri-taskbar) to show running app icons
 - Suspend / reboot / poweroff commands with confirmation (using [Sway](https://swaywm.org/)'s `swaynag` command)
 - Automatic suspend when laptop lid closed
 - Quick access to peripherals config via popup menu
