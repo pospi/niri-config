@@ -148,6 +148,22 @@ window-rule {
     }
 }
 
+// indicate screencasted windows with red colors
+window-rule {
+    match is-window-cast-target=true
+
+    border {
+        active-color "#7d0d2d"
+        inactive-color "#7d0d2d"
+    }
+
+    tab-indicator {
+        active-color "#f38ba8"
+        inactive-color "#7d0d2d"
+    }
+}
+
+
 // small apps; floating windows
 window-rule {
     match app-id=r#"^(gnome-calculator|protonvpn-app|MEGAsync)$"#
