@@ -115,6 +115,12 @@ prefer-no-csd
 // The path is formatted with strftime(3) to give you the screenshot date and time.
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
+// hide notifications in screen recordings
+layer-rule {
+    match namespace="^notifications$"
+    block-out-from "screencast"
+}
+
 // You can also set this to null to disable saving screenshots to disk.
 // screenshot-path null
 
