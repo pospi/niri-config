@@ -173,8 +173,7 @@ popd
 ## To-do
 
 - Replace `swaylock` & make the lockscreen work. (Need to find an alternative, it's throwing "Compositor does not support the input inhibitor protocol".)
-- Get an app switcher working (see [here](https://github.com/Kiki-Bouba-Team/niri-switch/issues/14) and [here](https://github.com/isaksamsten/niriswitcher/issues/2))
-- Useful Waybar extensions
+- Get an app switcher working (see [here](https://github.com/Kiki-Bouba-Team/niri-switch/issues/14) and [here](https://github.com/isaksamsten/niriswitcher/issues/2)). Too much dependency hell on 22.04. For now, `niri-taskbar` is probably sufficient.
 
 ## License
 
