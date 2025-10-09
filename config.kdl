@@ -102,6 +102,7 @@ spawn-sh-at-startup "/usr/bin/ulauncher --hide-window 1"
 spawn-at-startup "/usr/local/bin/mako"
 //spawn-at-startup "/usr/bin/swaybg -m fill -i '%h/Pictures/LakeSide.png'"
 spawn-at-startup "system76-scheduler-niri"  // hardware-specific process foregrounding helper
+spawn-at-startup "gnome-pomodoro"
 
 hotkey-overlay {
     skip-at-startup
