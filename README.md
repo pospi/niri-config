@@ -103,6 +103,12 @@ pushd ~/Downloads
     ninja -C build
     sudo ninja -C build install
   popd
+
+  # application taskbar for Waybar
+  git clone https://github.com/LawnGnome/niri-taskbar.git
+  pushd niri-taskbar
+    sudo cp target/release/libniri_taskbar.so /opt/
+  popd
 popd
 
 # base rendering

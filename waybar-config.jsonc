@@ -9,6 +9,7 @@
     // Choose the order of the modules
     "modules-left": [
         "niri/workspaces",
+        "cffi/niri-taskbar",
         "niri/window",
         "custom/media"
     ],
@@ -42,6 +43,10 @@
             "active": "",
             "default": ""
         }
+    },
+    "cffi/niri-taskbar": {
+        "module_path": "/opt/libniri_taskbar.so",
+        "notifications": true
     },
     "niri/window": {
         "format": "{}",
