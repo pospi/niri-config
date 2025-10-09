@@ -162,6 +162,7 @@ swaylock \
   --inside-color 00000088 \
   --separator-color 00000000 \
   --grace 2 \
+  --grace-no-mouse \
   "$@"
 ' | sudo tee /opt/swaylock.sh
 sudo chmod +x /opt/swaylock.sh
