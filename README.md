@@ -9,6 +9,7 @@
     - [Niri taskbar](https://github.com/LawnGnome/niri-taskbar) to show running app icons
 - Suspend / reboot / poweroff commands with confirmation (using [Sway](https://swaywm.org/)'s `swaynag` command)
 - Automatic suspend when laptop lid closed
+- Lockscreen via [Swaylock-effects](https://github.com/jirutka/swaylock-effects)
 - Quick access to peripherals config via popup menu
 - [Playerctl](https://github.com/altdesktop/playerctl) to manage media hotkeys
 - Screencasting functionality, with active window highlighting & notification hiding
@@ -111,6 +112,17 @@ pushd ~/Downloads
   pushd niri-taskbar
     sudo cp target/release/libniri_taskbar.so /opt/
   popd
+
+  # lockscreen utility
+  sudo apt install -y fish
+  git clone https://github.com/jirutka/swaylock-effects.git
+  pushd swaylock-effects
+    git checkout v1.7.0.0
+    meson build
+    ninja -C build
+    sudo ninja -C build install
+    sudo chmod a+s /usr/local/bin/swaylock
+  popd
 popd
 
 # base rendering
@@ -119,8 +131,8 @@ sudo apt install -y xdg-desktop-portal-gtk xdg-desktop-portal-gnome gnome-keyrin
 sudo apt-get install -y polkit-kde-agent-1
 # used for `swaynag` confirmation helper
 sudo apt install -y sway
-# desktop background, idle watching & locking
-sudo apt install -y swaybg swayidle swaylock
+# desktop background, idle watching
+sudo apt install -y swaybg swayidle
 # trigger notifications via shell
 sudo apt install -y libnotify-bin
 # media playback
@@ -134,6 +146,26 @@ sudo apt install -y ulauncher
 #   - https://github.com/Ulauncher/ulauncher-emoji
 #   - https://github.com/wckd02/port-killer-ulauncher
 
+# create wrapper script to configure locker
+echo '#!/usr/bin/env bash
+swaylock \
+  --screenshots \
+  --clock \
+  --datestr "%a %b %-m %Y" \
+  --indicator \
+  --effect-pixelate 25 \
+  --effect-vignette 0.5:0.5 \
+  --ring-color 5BCEFA \
+  --key-hl-color F5A9B8 \
+  --text-color FFFFFF \
+  --line-color 00000000 \
+  --inside-color 00000088 \
+  --separator-color 00000000 \
+  --grace 2 \
+  "$@"
+' | sudo tee /opt/swaylock.sh
+sudo chmod +x /opt/swaylock.sh
+
 # integrate idle handling
 echo '[Unit]
 PartOf=graphical-session.target
@@ -141,7 +173,7 @@ After=graphical-session.target
 Requisite=graphical-session.target
 
 [Service]
-ExecStart=/usr/bin/swayidle -w timeout 601 'niri msg action power-off-monitors' timeout 600 'swaylock -f' before-sleep 'swaylock -f'
+ExecStart=/usr/bin/swayidle -w timeout 601 'niri msg action power-off-monitors' timeout 600 '/opt/swaylock.sh -f' before-sleep '/opt/swaylock.sh -f'
 Restart=on-failure' | tee "$HOME/.config/systemd/user/swayidle.service"
 systemctl --user daemon-reload
 systemctl --user add-wants niri.service swayidle.service

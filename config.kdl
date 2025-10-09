@@ -205,7 +205,7 @@ binds {
 
     Mod+Return hotkey-overlay-title="Open a Terminal: gnome-terminal" { spawn "gnome-terminal"; }
     Mod+D hotkey-overlay-title="Run an Application: ulauncher" { spawn "ulauncher-toggle"; }
-    Mod+Ctrl+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
+    Mod+Ctrl+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "/opt/swaylock.sh"; }
 
     Mod+Shift+2 hotkey-overlay-title="Run an Application: File browser" { spawn "nautilus"; }
     Mod+Shift+3 hotkey-overlay-title="Run an Application: Sublime Text" { spawn "subl"; }
