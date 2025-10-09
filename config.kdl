@@ -189,6 +189,11 @@ switch-events {
     lid-close { spawn "systemctl" "suspend" "-i"; }
 }
 
+environment {
+    // Electron app hint for Wayland rendering (v28+)
+    ELECTRON_OZONE_PLATFORM_HINT "auto"
+}
+
 binds {
     // To find an XKB name for a particular key, you may use a program like wev.
 
