@@ -9,6 +9,7 @@
 - Automatic suspend when laptop lid closed
 - Quick access to peripherals config via popup menu
 - [Playerctl](https://github.com/altdesktop/playerctl) to manage media hotkeys
+- Screencasting functionality, with active window highlighting & notification hiding
 - LCD backlight adjustment & volume controls all work
 - A reasonably intuitive set of custom keybindings
 
