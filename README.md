@@ -158,34 +158,58 @@ sudo apt install -y ulauncher
 
 # create wrapper script to configure locker
 echo '#!/usr/bin/env bash
-swaylock \
-  --screenshots \
-  --clock \
-  --datestr "%a %b %-m %Y" \
-  --indicator \
-  --effect-pixelate 25 \
-  --effect-vignette 0.5:0.5 \
-  --ring-color 5BCEFA \
-  --key-hl-color F5A9B8 \
-  --text-color FFFFFF \
-  --line-color 00000000 \
-  --inside-color 00000088 \
-  --separator-color 00000000 \
-  --grace 2 \
-  --grace-no-mouse \
-  "$@"
+
+isLockActive() {
+  lsStatus=$(ps cax | grep swaylock)
+  if [[ -z $lsStatus ]]; then
+    return 1
+  fi
+  return 0
+}
+
+doLock() {
+  swaylock -f \
+    --screenshots \
+    --clock \
+    --datestr "%a %b %-m %Y" \
+    --indicator \
+    --effect-pixelate 25 \
+    --effect-vignette 0.5:0.5 \
+    --ring-color 5BCEFA \
+    --key-hl-color F5A9B8 \
+    --text-color FFFFFF \
+    --line-color 00000000 \
+    --inside-color 00000088 \
+    --separator-color 00000000 \
+    "$@"
+}
+
+if isLockActive; then
+  echo "Refusing to start Swaylock: process already active"
+  exit 1
+fi
+
+
+case "$1" in
+  immediate)
+    doLock "${@:2}"
+  ;;
+  *)
+    doLock --grace 2 --grace-no-mouse "$@"
+  ;;
+esac
 ' | sudo tee /opt/swaylock.sh
 sudo chmod +x /opt/swaylock.sh
 
 # integrate idle handling
-echo '[Unit]
+echo "[Unit]
 PartOf=graphical-session.target
 After=graphical-session.target
 Requisite=graphical-session.target
 
 [Service]
-ExecStart=/usr/bin/swayidle -w timeout 601 'niri msg action power-off-monitors' timeout 600 '/opt/swaylock.sh -f' before-sleep '/opt/swaylock.sh -f'
-Restart=on-failure' | tee "$HOME/.config/systemd/user/swayidle.service"
+ExecStart=/usr/local/bin/swayidle -w timeout 605 'niri msg action power-off-monitors' timeout 606 'systemctl suspend -i' before-sleep '/opt/swaylock.sh immediate' after-resume 'niri msg action power-on-monitors'
+Restart=on-failure" | tee "$HOME/.config/systemd/user/swayidle.service"
 systemctl --user daemon-reload
 systemctl --user add-wants niri.service swayidle.service
 
