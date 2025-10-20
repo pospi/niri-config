@@ -123,6 +123,16 @@ pushd ~/Downloads
     sudo ninja -C build install
     sudo chmod a+s /usr/local/bin/swaylock
   popd
+
+  # idle management utility
+  # (ideally this could be installed from apt, but packaged versions are outdated & throw unsupported idle protocol error)
+  wget https://github.com/swaywm/swayidle/releases/download/1.8.0/swayidle-1.8.0.tar.gz
+  tar -zxf ./swayidle-1.8.0.tar.gz
+  pushd swayidle-1.8.0
+    meson build/
+    ninja -C build/
+    sudo ninja -C build/ install
+  popd
 popd
 
 # base rendering
@@ -131,8 +141,8 @@ sudo apt install -y xdg-desktop-portal-gtk xdg-desktop-portal-gnome gnome-keyrin
 sudo apt-get install -y polkit-kde-agent-1
 # used for `swaynag` confirmation helper
 sudo apt install -y sway
-# desktop background, idle watching
-sudo apt install -y swaybg swayidle
+# desktop background
+sudo apt install -y swaybg
 # trigger notifications via shell
 sudo apt install -y libnotify-bin
 # media playback
