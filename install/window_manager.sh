@@ -4,12 +4,18 @@
 #
 
 . util/paths.sh
+. util/platform_flags.sh
 
 # enable Wayland in GDM3 config
 sudo sed -i -e 's/WaylandEnable=false/WaylandEnable=true/' /etc/gdm3/custom.conf
 
 # install system dependencies for compiling Niri
 sudo apt install -y libclang-dev libudev-dev libgbm-dev libxkbcommon-dev libegl1-mesa-dev libwayland-dev libdbus-1-dev libsystemd-dev libseat-dev libpipewire-0.3-dev libpango1.0-dev libdisplay-info-dev
+
+# Ubuntu 22.04 pipewire-1.0.0 build deps
+if [[ "$IS_2204" -eq 0 && "$IS_UBUNTU" -eq 0 ]]; then
+  sudo apt install -y gstreamer1.0-pipewire libpipewire-0.3-{0,dev,modules} libspa-0.2-{bluetooth,dev,jack,modules} pipewire{,-{audio-client-libraries,pulse,bin,jack,alsa,v4l2,libcamera,locales,tests}}
+fi
 
 pushd "$TEMPDIR"
   # libinput-dev is outdated & needs manual compilation,
