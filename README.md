@@ -34,10 +34,6 @@ Commands are provided as a reference, and presume a freshly installed system. Th
 
 On other releases you may not need some dependencies, and on other distros you will need to adapt to your preferred package manager. Ubuntu 24.04 is presumed as the default. See usage of the platform detection logic in `install/util/platform_flags.sh` throughout the various scripts for more info.
 
-```bash
-git clone https://github.com/pospi/niri-config.git $HOME/.config/niri
-```
-
 
 ## Scheduler for System76 hardware
 
