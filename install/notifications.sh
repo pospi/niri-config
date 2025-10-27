@@ -4,14 +4,20 @@
 #
 
 . util/paths.sh
+. util/platform_flags.sh
 
-# trigger notifications via shell
+# build dependencies
+sudo apt install -y scdoc
+if [[ "$IS_2204" -eq 0 && "$IS_UBUNTU" -eq 0 ]]; then
+  sudo apt install -y -t bookworm-backports wayland-protocols
+fi
+
+# util to trigger notifications via shell
 sudo apt install -y libnotify-bin
 
 pushd "$TEMPDIR"
 
   # build & install notifications daemon
-  sudo apt install -y scdoc
   git clone https://github.com/emersion/mako.git
   pushd mako
     git checkout v1.10.0
