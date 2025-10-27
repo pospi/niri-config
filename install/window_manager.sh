@@ -9,9 +9,6 @@
 sudo sed -i -e 's/WaylandEnable=false/WaylandEnable=true/' /etc/gdm3/custom.conf
 
 # install system dependencies for compiling Niri
-sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 6ED0E7B82643E131 78DBA3BC47EF2265
-echo 'deb http://deb.debian.org/debian bookworm-backports main contrib' | sudo tee /etc/apt/sources.list.d/debian-backports.list
-sudo apt update
 sudo apt install -y libclang-dev libudev-dev libgbm-dev libxkbcommon-dev libegl1-mesa-dev libwayland-dev libdbus-1-dev libsystemd-dev libseat-dev libpipewire-0.3-dev libpango1.0-dev libdisplay-info-dev
 
 pushd "$TEMPDIR"
