@@ -18,16 +18,21 @@ if [[ "$IS_2204" -eq 0 && "$IS_UBUNTU" -eq 0 ]]; then
 fi
 
 pushd "$TEMPDIR"
-  # libinput-dev is outdated & needs manual compilation,
-  # but ideally could be installed from `bookworm-backports` above
-  sudo apt install -y libev-dev libevdev-dev libmtdev-dev libwacom-dev libgtk-3-dev
-  git clone https://gitlab.freedesktop.org/libinput/libinput
-  pushd libinput
-    git checkout 1.29.1
-    meson setup --prefix=/usr builddir/
-    ninja -C builddir/
-    sudo ninja -C builddir/ install
-  popd
+
+  if [[ "$IS_2204" -eq 0 ]]; then
+    # libinput-dev is outdated & needs manual compilation in 22.04
+    sudo apt install -y libev-dev libevdev-dev libmtdev-dev libwacom-dev libgtk-3-dev
+    git clone https://gitlab.freedesktop.org/libinput/libinput
+    pushd libinput
+      git checkout 1.29.1
+      meson setup --prefix=/usr builddir/
+      ninja -C builddir/
+      sudo ninja -C builddir/ install
+    popd
+  else
+    # can be installed from system registries in 24.04
+    sudo apt install libinput libinput-dev
+  fi
 
   # build & install Niri window manager
   git clone https://github.com/YaLTeR/niri.git
