@@ -330,22 +330,23 @@ binds {
     Mod+Comma  { consume-or-expel-window-left; }
     Mod+Period { consume-or-expel-window-right; }
 
+    // column sizing
     Mod+R { switch-preset-column-width; }
     Mod+Shift+R { switch-preset-column-width-back; }
     Mod+E { switch-preset-window-height; }
     Mod+Shift+E { switch-preset-window-height-back; }
     Mod+Ctrl+E { reset-window-height; }
+
+    // column positioning
+    Mod+C { center-column; }
+    Mod+Ctrl+C { center-visible-columns; }
+
+    // screen sizing
     Mod+F { maximize-column; }
     Mod+Shift+F { fullscreen-window; }
-
     // Expand the focused column to space not taken up by other fully visible columns.
     // Makes the column "fill the rest of the space".
-    Mod+Ctrl+F { expand-column-to-available-width; }
-
-    Mod+C { center-column; }
-
-    // Center all fully visible columns on screen.
-    Mod+Ctrl+C { center-visible-columns; }
+    Mod+Alt+F { expand-column-to-available-width; }
 
     // This command can also:
     // * set width in pixels: "1000"
