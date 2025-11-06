@@ -205,7 +205,8 @@ binds {
     // The quit action will show a confirmation dialog to avoid accidental exits.
     Mod+Alt+W hotkey-overlay-title="Exit Niri" { quit; }
     Mod+Shift+Slash { show-hotkey-overlay; }
-    Mod+O hotkey-overlay-title="Show overview" repeat=false { toggle-overview; }
+    Mod+W hotkey-overlay-title="Show overview" repeat=false { toggle-overview; }
+    Mod+O hotkey-overlay-title=null repeat=false { toggle-overview; }
 
     Alt+Tab repeat=false { spawn "niri-switch"; }
 
@@ -363,11 +364,6 @@ binds {
     // Move the focused window between the floating and the tiling layout.
     Mod+V       { toggle-window-floating; }
     Mod+Shift+V { switch-focus-between-floating-and-tiling; }
-
-    // Toggle tabbed column display mode.
-    // Windows in this column will appear as vertical tabs,
-    // rather than stacked on top of each other.
-    Mod+W { toggle-column-tabbed-display; }
 
     // Actions to switch layouts.
     // Note: if you uncomment these, make sure you do NOT have
