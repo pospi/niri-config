@@ -14,7 +14,48 @@
 - [Playerctl](https://github.com/altdesktop/playerctl) to manage media hotkeys
 - Screencasting functionality, with active window highlighting & notification hiding
 - LCD backlight adjustment & volume controls all work
-- A reasonably intuitive set of custom keybindings
+
+## Keybindings
+
+### Design
+
+TLDR; it's designed to feel somatically similar to working with text editing on Linux & Windows machines.
+
+Key chords are played compositionally, which means that you hold more of them down to combine interactions.
+
+Holding `Mod` (or Windows) activates window system interaction mode, and takes focus away from the currently active application window.
+
+For the purposes of this description, the Niri window manager is considered to be organised as follows:
+
+- Opened application **windows** are auto-placed side by side in **columns** on an infinitely scrolling **row**.
+- **Columns** may be subdivided into multiple **windows**.
+    - Once subdivided, **windows** are said to be **stacked** within their **column**.
+- Groups of **rows** are displayed and organised vertically on a physical computer **monitor**.
+
+### Chords
+
+1. `Mod` (or Windows) activates **window** interaction mode.
+    1. `Mod`+`arrow keys` = change focused **window**
+    2. `Mod`+`Shift`+`arrow keys` = move focused area:
+        - **columns** move left/right *within* **row**; or
+        - **windows** move up/down within **column** and out to adjacent **row** when it reaches the edge
+    3. `Mod`+(`Page_Down`|`Page_Up`) = change focus between **rows**
+        - `Mod`+`Shift`+(`Page_Down`|`Page_Up`) = move focused **column** between **rows**
+    4. `Mod`+(`Home`|`End`) = jump to start/end of **row**
+        - `Mod`+`Shift`+(`Home`|`End`) = move the focused **column** to start/end of **row**
+2. `Ctrl`+`Alt` activates **monitor** interaction mode.
+    1. `Ctrl`+`Alt`+`arrow keys` = change focused **monitor**
+    2. `Ctrl`+`Alt`+`Shift`+`arrow keys` = moves **columns** between **monitors**
+    3. `Ctrl`+`Alt`+`Shift`+(`Page_Down`|`Page_Up`) = moves **rows** up/down *within* the same **monitor**
+    4. `Ctrl`+`Alt`+`Shift`+(`Home`|`End`) = moves **rows** left/right *among* **monitors**
+4. `Mod`+`R` toggles focused **column** widths among presets
+    - (`Mod`+`Shift`+`R` to go backwards)
+5. `Mod`+`E` toggles focused **window** heights among presets
+    - (`Mod`+`Shift`+`E` to go backwards)
+    - (`Mod`+`Ctrl`+`E` to reset to full height)
+3. `Mod`+(`[`|`]`) will split & shuffle stacked **windows** left/right between **columns** if there is space available
+
+Use of the `scroll wheel` is alike `arrow keys`- i.e. it changes focus vertically between **rows**; and when combined with `Ctrl` changes focus horizontally between **columns**.
 
 ## Installation
 
