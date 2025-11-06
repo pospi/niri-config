@@ -6,6 +6,11 @@ A somatically informed window manager configuration to support a 2D spatial OS i
 
 ## Features & integrations
 
+- Ergonomically considered [keybindings](#keybindings) for maximum work efficiency:
+    - The arrow keys move things.
+    - Windows size horizontally to enable switching focus to one's previous task by wiggling the mouse pointer at the border between them.
+    - All OS functionality is instantly (sub-200ms) accessible via one's (likely) most muscularly developed fingers.
+    - [Conceptually lean](#conceptual-model) & quick to learn!
 - [ULauncher](https://ulauncher.io/) for app launching
 - [Mako](https://github.com/emersion/mako) for desktop notifications
 - Latest [Waybar](https://github.com/Alexays/Waybar) for system tray
@@ -83,7 +88,6 @@ Commands are provided as a reference, and presume a freshly installed system. Th
 - Pop!OS 22.04
 
 On other releases you may not need some dependencies, and on other distros you will need to adapt to your preferred package manager. Ubuntu 24.04 is presumed as the default. See usage of the platform detection logic in `install/util/platform_flags.sh` throughout the various scripts for more info.
-
 
 ### Scheduler for System76 hardware
 
