@@ -32,7 +32,7 @@ For the purposes of this description, the Niri window manager is considered to b
 
 - Opened application **windows** are auto-placed side by side in **columns** on an infinitely scrolling **row**.
 - **Columns** may be subdivided into multiple **windows**.
-- Groups of **rows** are displayed and organised vertically on a physical computer **monitor**.
+- Groups of **rows** are organised vertically and displayed, one at a time, to the full height of a physical computer **monitor**.
 - By default, a **column** occupies 100% of the available **monitor** space.
 - **Columns** can be "subdivided" such that individual **windows** no longer take up the full height of the **monitor**.
     - Once subdivided, **windows** are said to be **stacked** within their **column**.
