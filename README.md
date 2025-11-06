@@ -17,7 +17,18 @@
 
 ## Keybindings
 
-### Design
+### Conceptual model
+
+For the purposes of this description, the Niri window manager is considered to be organised as follows:
+
+- Opened application **windows** are auto-placed side by side in **columns** on an infinitely scrolling **row**.
+- **Columns** may be subdivided into multiple **windows**.
+- Groups of **rows** are displayed and organised vertically on a physical computer **monitor**.
+- By default, a **column** occupies 100% of the available **monitor** space.
+- **Columns** can be "subdivided" such that individual **windows** no longer take up the full height of the **monitor**.
+    - Once subdivided, **windows** are said to be **stacked** within their **column**.
+
+### Interaction design
 
 TLDR; it's designed to feel somatically similar to working with text editing on Linux & Windows machines.
 
@@ -25,20 +36,14 @@ Key chords are played compositionally, which means that you hold more of them do
 
 Holding `Mod` (or Windows) activates window system interaction mode, and takes focus away from the currently active application window.
 
-For the purposes of this description, the Niri window manager is considered to be organised as follows:
-
-- Opened application **windows** are auto-placed side by side in **columns** on an infinitely scrolling **row**.
-- **Columns** may be subdivided into multiple **windows**.
-    - Once subdivided, **windows** are said to be **stacked** within their **column**.
-- Groups of **rows** are displayed and organised vertically on a physical computer **monitor**.
-
 ### Chords
 
 1. `Mod` (or Windows) activates **window** interaction mode.
     1. `Mod`+`arrow keys` = change focused **window**
     2. `Mod`+`Shift`+`arrow keys` = move focused area:
-        - **columns** move left/right *within* **row**; or
-        - **windows** move up/down within **column** and out to adjacent **row** when it reaches the edge
+        - **columns** move left/right *within* a **row**
+        - **windows** move up/down *within* a **column** 
+            - and out to the adjacent **row** when it reaches the top/bottom of the **column**
     3. `Mod`+(`Page_Down`|`Page_Up`) = change focus between **rows**
         - `Mod`+`Shift`+(`Page_Down`|`Page_Up`) = move focused **column** between **rows**
     4. `Mod`+(`Home`|`End`) = jump to start/end of **row**
