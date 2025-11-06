@@ -1,5 +1,9 @@
 # Workstation configuration for [Niri](https://yalter.github.io/niri/) window manager
 
+A somatically informed window manager configuration to support a 2D spatial OS interface.
+
+*(Imagine it like you're spreading out thoughts on the floor.)*
+
 ## Features & integrations
 
 - [ULauncher](https://ulauncher.io/) for app launching
