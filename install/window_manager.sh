@@ -31,7 +31,7 @@ pushd "$TEMPDIR"
     popd
   else
     # can be installed from system registries in 24.04
-    sudo apt install libinput libinput-dev
+    sudo apt install -y libinput-dev
   fi
 
   # build & install Niri window manager

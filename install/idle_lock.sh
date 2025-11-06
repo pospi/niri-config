@@ -76,7 +76,7 @@ esac
 ' | sudo tee /opt/swaylock.sh
 sudo chmod +x /opt/swaylock.sh
 
-# integrate idle handling
+# integrate idle handling with systemd
 echo "[Unit]
 PartOf=graphical-session.target
 After=graphical-session.target

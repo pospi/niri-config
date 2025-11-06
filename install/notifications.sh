@@ -10,6 +10,8 @@
 sudo apt install -y scdoc
 if [[ "$IS_2204" -eq 0 && "$IS_UBUNTU" -eq 0 ]]; then
   sudo apt install -y -t bookworm-backports wayland-protocols
+else
+  sudo apt install -y wayland-protocols
 fi
 
 # util to trigger notifications via shell
