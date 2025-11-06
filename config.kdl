@@ -197,21 +197,24 @@ environment {
 
 binds {
     // To find an XKB name for a particular key, you may use a program like wev.
-
+    //
     // Most actions that you can bind here can also be invoked programmatically with
     // `niri msg action do-something`.
+    //
 
+    // The quit action will show a confirmation dialog to avoid accidental exits.
+    Mod+Alt+W hotkey-overlay-title="Exit Niri" { quit; }
     Mod+Shift+Slash { show-hotkey-overlay; }
+    Mod+O hotkey-overlay-title="Show overview" repeat=false { toggle-overview; }
 
-    Mod+Return hotkey-overlay-title="Open a Terminal: gnome-terminal" { spawn "gnome-terminal"; }
-    Mod+D hotkey-overlay-title="Run an Application: ulauncher" { spawn "ulauncher-toggle"; }
-    Mod+Ctrl+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "/opt/swaylock.sh"; }
+    Alt+Tab repeat=false { spawn "niri-switch"; }
 
-    Mod+Shift+2 hotkey-overlay-title="Run an Application: File browser" { spawn "nautilus"; }
-    Mod+Shift+3 hotkey-overlay-title="Run an Application: Sublime Text" { spawn "subl"; }
-    Mod+Shift+4 hotkey-overlay-title="Run an Application: Waterfox" { spawn "waterfox"; }
-    Mod+Shift+5 hotkey-overlay-title="Run an Application: Rhythmbox" { spawn "rhythmbox"; }
-    Mod+Shift+0 hotkey-overlay-title="Run an Application: Logseq" { spawn "Logseq"; }
+    Mod+Q repeat=false hotkey-overlay-title=null { close-window; }
+    Alt+F4 repeat=false { close-window; }
+
+    Mod+Return hotkey-overlay-title="Open a terminal" { spawn "gnome-terminal"; }
+    Mod+D hotkey-overlay-title="Run an application" { spawn "ulauncher-toggle"; }
+    Mod+Ctrl+L hotkey-overlay-title="Lock the screen" { spawn "/opt/swaylock.sh"; }
 
     Mod+Ctrl+P hotkey-overlay-title="Peripherals" {
         spawn-sh "swaynag --background 3cfcdf --text 000000 --button-background 027571 --button-text FFFFFF --border 015b58 -y overlay -m 'Peripherals:' -Z 'Bluetooth' 'blueman-manager' -Z 'Audio' 'pavucontrol' -Z 'Video' 'wdisplays'";
@@ -226,49 +229,54 @@ binds {
     Mod+Ctrl+Delete hotkey-overlay-title="Shutdown" {
         spawn-sh "swaynag -t error -y overlay -m 'Do you really want to shut down?' -Z 'Power off' 'systemctl poweroff'";
     }
-    // The quit action will show a confirmation dialog to avoid accidental exits.
-    Mod+Ctrl+W { quit; }
-    Ctrl+Alt+Delete { quit; }
 
-    // XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+"; }
-    // XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
-    // XF86AudioMute        allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
-    // XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
-    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "pactl set-sink-volume @DEFAULT_SINK@ +5% && killall -SIGUSR1 i3status; exec play -q /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga"; }
-    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "pactl set-sink-volume @DEFAULT_SINK@ -5% && killall -SIGUSR1 i3status; exec play -q /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga"; }
-    XF86AudioMute        allow-when-locked=true { spawn-sh "pactl set-sink-mute @DEFAULT_SINK@ toggle; exec play -q /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga"; }
-    // XF86AudioMicMute     allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
-
-    XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
-    XF86AudioPause        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
-    XF86AudioStop        allow-when-locked=true { spawn-sh "playerctl stop"; }
-    XF86AudioPrev        allow-when-locked=true { spawn-sh "playerctl previous"; }
-    XF86AudioNext        allow-when-locked=true { spawn-sh "playerctl next"; }
+    // Commonly used application launch shortcuts
+    Mod+F1 hotkey-overlay-title="Logseq" { spawn "Logseq"; }
+    Mod+F2 hotkey-overlay-title="File browser" { spawn "nautilus"; }
+    Mod+F3 hotkey-overlay-title="Sublime Text" { spawn "subl"; }
+    Mod+F4 hotkey-overlay-title="Waterfox" { spawn "waterfox"; }
+    Mod+F5 hotkey-overlay-title="Rhythmbox" { spawn "rhythmbox"; }
 
     XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
     XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
-    Mod+F9 allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
-    Mod+F8 allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
 
-    Mod+O repeat=false { toggle-overview; }
-
-    Mod+Q repeat=false { close-window; }
-    Alt+F4 repeat=false { close-window; }
+    Mod+F9 hotkey-overlay-title="screen brightness -" allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
+    Mod+F8 hotkey-overlay-title="screen brightness +" allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
 
     Mod+Down     { focus-window-or-workspace-down; }
     Mod+Up       { focus-window-or-workspace-up; }
     Mod+Left  { focus-column-left; }
     Mod+Right { focus-column-right; }
 
-    Mod+Ctrl+Down  { move-window-down-or-to-workspace-down; }
-    Mod+Ctrl+Up    { move-window-up-or-to-workspace-up; }
-    Mod+Ctrl+Left  { move-column-left; }
-    Mod+Ctrl+Right { move-column-right; }
+    Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
+    Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
+    Mod+Ctrl+WheelScrollDown      cooldown-ms=150      { focus-column-right; }
+    Mod+Ctrl+WheelScrollUp        cooldown-ms=150        { focus-column-left; }
+
+    Mod+Shift+WheelScrollDown      cooldown-ms=150      { move-window-down-or-to-workspace-down; }
+    Mod+Shift+WheelScrollUp        cooldown-ms=150        { move-window-up-or-to-workspace-up; }
+    Mod+Shift+Ctrl+WheelScrollDown        cooldown-ms=150 { move-column-right; }
+    Mod+Shift+Ctrl+WheelScrollUp          cooldown-ms=150 { move-column-left; }
+
+    Mod+Shift+Down  { move-window-down-or-to-workspace-down; }
+    Mod+Shift+Up    { move-window-up-or-to-workspace-up; }
+    Mod+Shift+Left  { move-column-left; }
+    Mod+Shift+Right { move-column-right; }
 
     Mod+Home { focus-column-first; }
     Mod+End  { focus-column-last; }
+
     Mod+Shift+Home { move-column-to-first; }
     Mod+Shift+End  { move-column-to-last; }
+
+    Mod+Page_Down      { focus-workspace-down; }
+    Mod+Page_Up        { focus-workspace-up; }
+
+    Mod+Shift+Page_Down { move-window-to-workspace-down; }
+    Mod+Shift+Page_Up   { move-window-to-workspace-up; }
+
+    Mod+Shift+Alt+Page_Down { move-column-to-workspace-down; }
+    Mod+Shift+Alt+Page_Up   { move-column-to-workspace-up; }
 
     Ctrl+Alt+Left  { focus-monitor-left; }
     Ctrl+Alt+Down  { focus-monitor-down; }
@@ -280,34 +288,10 @@ binds {
     Ctrl+Alt+Shift+Up    { move-column-to-monitor-up; }
     Ctrl+Alt+Shift+Right { move-column-to-monitor-right; }
 
-    Mod+Ctrl+Shift+Left  { move-window-to-monitor-left; }
-    Mod+Ctrl+Shift+Down  { move-window-to-monitor-down; }
-    Mod+Ctrl+Shift+Up    { move-window-to-monitor-up; }
-    Mod+Ctrl+Shift+Right { move-window-to-monitor-right; }
-
-    Mod+Shift+Ctrl+Alt+Left  { move-workspace-to-monitor-left; }
-    Mod+Shift+Ctrl+Alt+Right  { move-workspace-to-monitor-right; }
-    Mod+Shift+Ctrl+Alt+Up  { move-workspace-to-monitor-up; }
-    Mod+Shift+Ctrl+Alt+Down  { move-workspace-to-monitor-down; }
-
-    Mod+Page_Down      { focus-workspace-down; }
-    Mod+Page_Up        { focus-workspace-up; }
-    Mod+Ctrl+Page_Down { move-column-to-workspace-down; }
-    Mod+Ctrl+Page_Up   { move-column-to-workspace-up; }
-
-    Mod+Ctrl+Shift+Page_Down { move-window-to-workspace-down; }
-    Mod+Ctrl+Shift+Page_Up   { move-window-to-workspace-up; }
-
-    Mod+Shift+Page_Down { move-workspace-down; }
-    Mod+Shift+Page_Up   { move-workspace-up; }
-
-    Mod+WheelScrollDown      cooldown-ms=150 { focus-workspace-down; }
-    Mod+WheelScrollUp        cooldown-ms=150 { focus-workspace-up; }
-
-    Mod+Ctrl+WheelScrollDown      { focus-column-right; }
-    Mod+Ctrl+WheelScrollUp        { focus-column-left; }
-    Mod+Ctrl+Shift+WheelScrollDown { move-column-right; }
-    Mod+Ctrl+Shift+WheelScrollUp   { move-column-left; }
+    Ctrl+Alt+Shift+Home  { move-workspace-to-monitor-left; }
+    Ctrl+Alt+Shift+End  { move-workspace-to-monitor-right; }
+    Ctrl+Alt+Shift+Page_Down { move-workspace-down; }
+    Ctrl+Alt+Shift+Page_Up   { move-workspace-up; }
 
     Mod+1 { focus-workspace 1; }
     Mod+2 { focus-workspace 2; }
@@ -318,37 +302,32 @@ binds {
     Mod+7 { focus-workspace 7; }
     Mod+8 { focus-workspace 8; }
     Mod+9 { focus-workspace 9; }
-    Mod+Ctrl+1 { move-column-to-workspace 1; }
-    Mod+Ctrl+2 { move-column-to-workspace 2; }
-    Mod+Ctrl+3 { move-column-to-workspace 3; }
-    Mod+Ctrl+4 { move-column-to-workspace 4; }
-    Mod+Ctrl+5 { move-column-to-workspace 5; }
-    Mod+Ctrl+6 { move-column-to-workspace 6; }
-    Mod+Ctrl+7 { move-column-to-workspace 7; }
-    Mod+Ctrl+8 { move-column-to-workspace 8; }
-    Mod+Ctrl+9 { move-column-to-workspace 9; }
-    Mod+Ctrl+Shift+1 { move-window-to-workspace 1; }
-    Mod+Ctrl+Shift+2 { move-window-to-workspace 2; }
-    Mod+Ctrl+Shift+3 { move-window-to-workspace 3; }
-    Mod+Ctrl+Shift+4 { move-window-to-workspace 4; }
-    Mod+Ctrl+Shift+5 { move-window-to-workspace 5; }
-    Mod+Ctrl+Shift+6 { move-window-to-workspace 6; }
-    Mod+Ctrl+Shift+7 { move-window-to-workspace 7; }
-    Mod+Ctrl+Shift+8 { move-window-to-workspace 8; }
-    Mod+Ctrl+Shift+9 { move-window-to-workspace 9; }
+    Mod+Shift+1 { move-window-to-workspace 1; }
+    Mod+Shift+2 { move-window-to-workspace 2; }
+    Mod+Shift+3 { move-window-to-workspace 3; }
+    Mod+Shift+4 { move-window-to-workspace 4; }
+    Mod+Shift+5 { move-window-to-workspace 5; }
+    Mod+Shift+6 { move-window-to-workspace 6; }
+    Mod+Shift+7 { move-window-to-workspace 7; }
+    Mod+Shift+8 { move-window-to-workspace 8; }
+    Mod+Shift+9 { move-window-to-workspace 9; }
+    Mod+Shift+Alt+1 { move-column-to-workspace 1; }
+    Mod+Shift+Alt+2 { move-column-to-workspace 2; }
+    Mod+Shift+Alt+3 { move-column-to-workspace 3; }
+    Mod+Shift+Alt+4 { move-column-to-workspace 4; }
+    Mod+Shift+Alt+5 { move-column-to-workspace 5; }
+    Mod+Shift+Alt+6 { move-column-to-workspace 6; }
+    Mod+Shift+Alt+7 { move-column-to-workspace 7; }
+    Mod+Shift+Alt+8 { move-column-to-workspace 8; }
+    Mod+Shift+Alt+9 { move-column-to-workspace 9; }
 
     // Switches focus between the current and the previous workspace.
     // Mod+Tab { focus-workspace-previous; }
 
-    // The following binds move the focused window in and out of a column.
-    // If the window is alone, they will consume it into the nearby column to the side.
-    // If the window is already in a column, they will expel it out.
     Mod+BracketLeft  { consume-or-expel-window-left; }
     Mod+BracketRight { consume-or-expel-window-right; }
-    // Consume one window from the right to the bottom of the focused column.
-    Mod+Comma  { consume-window-into-column; }
-    // Expel the bottom window from the focused column to the right.
-    Mod+Period { expel-window-from-column; }
+    Mod+Comma  { consume-or-expel-window-left; }
+    Mod+Period { consume-or-expel-window-right; }
 
     Mod+R { switch-preset-column-width; }
     Mod+Shift+R { switch-preset-column-width-back; }
@@ -415,4 +394,16 @@ binds {
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
     Mod+Alt+P { power-off-monitors; }
+
+    // standard keyboard hardware media & system buttons
+
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "pactl set-sink-volume @DEFAULT_SINK@ +5% && killall -SIGUSR1 i3status; exec play -q /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "pactl set-sink-volume @DEFAULT_SINK@ -5% && killall -SIGUSR1 i3status; exec play -q /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga"; }
+    XF86AudioMute        allow-when-locked=true { spawn-sh "pactl set-sink-mute @DEFAULT_SINK@ toggle; exec play -q /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga"; }
+
+    XF86AudioPlay        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
+    XF86AudioPause        allow-when-locked=true { spawn-sh "playerctl play-pause"; }
+    XF86AudioStop        allow-when-locked=true { spawn-sh "playerctl stop"; }
+    XF86AudioPrev        allow-when-locked=true { spawn-sh "playerctl previous"; }
+    XF86AudioNext        allow-when-locked=true { spawn-sh "playerctl next"; }
 }
