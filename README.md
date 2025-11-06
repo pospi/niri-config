@@ -1,6 +1,6 @@
 # Workstation configuration for [Niri](https://yalter.github.io/niri/) window manager
 
-A somatically informed window manager configuration to support a 2D spatial OS interface.
+A somatically & haptically informed window manager configuration to support an autonomic 2D spatial OS interface.
 
 *(Imagine it like you're spreading out thoughts on the floor.)*
 
@@ -10,6 +10,7 @@ A somatically informed window manager configuration to support a 2D spatial OS i
     - The arrow keys move things.
     - Windows size horizontally to enable switching focus to one's previous task by wiggling the mouse pointer at the border between them.
     - All OS functionality is instantly (sub-200ms) accessible via one's (likely) most muscularly developed fingers.
+    - Zoom in/out to overview with a single key chord, maintaining consistent navigation with regular zoomlevel.
     - [Conceptually lean](#conceptual-model) & quick to learn!
 - [ULauncher](https://ulauncher.io/) for app launching
 - [Mako](https://github.com/emersion/mako) for desktop notifications
@@ -43,11 +44,11 @@ TLDR; it's designed to feel somatically similar to working with text editing on 
 
 Key chords are played compositionally, which means that you hold more of them down to combine interactions.
 
-Holding `Mod` (or Windows) activates window system interaction mode, and takes focus away from the currently active application window.
+Holding `Mod` (or `Win`) activates window system interaction mode, and takes focus away from the currently active application window.
 
 ### Chords
 
-1. `Mod` (or Windows) activates **window** interaction mode.
+1. `Mod` activates **window** interaction mode.
     1. `Mod`+`arrow keys` = change focused **window**
     2. `Mod`+`Shift`+`arrow keys` = move focused area:
         - **columns** move left/right *within* a **row**

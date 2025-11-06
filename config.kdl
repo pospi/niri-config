@@ -205,7 +205,7 @@ binds {
     // The quit action will show a confirmation dialog to avoid accidental exits.
     Mod+Alt+W hotkey-overlay-title="Exit Niri" { quit; }
     Mod+Shift+Slash { show-hotkey-overlay; }
-    Mod+W hotkey-overlay-title="Show overview" repeat=false { toggle-overview; }
+    Mod+S hotkey-overlay-title="Show overview" repeat=false { toggle-overview; }
     Mod+O hotkey-overlay-title=null repeat=false { toggle-overview; }
 
     Alt+Tab repeat=false { spawn "niri-switch"; }
