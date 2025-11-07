@@ -10,7 +10,7 @@ A somatically, haptically & neurologically informed window manager configuration
 
 Great for ADHD sufferers, multitasking workflows, and those who struggle with unproductive tangenting.
 
-> You could bring that un-usably slow discarded Windows laptop back to life with these tools. I *guarantee* it will be a much faster & more pleasant machine to use than when it was Microsoft-tainted.
+> (You could bring that un-usably slow discarded Windows laptop back to life with these tools! I *guarantee* it will be a much faster & more pleasant machine to use than when it was Microsoft-tainted.)
 
 ## Features & integrations
 
