@@ -8,6 +8,7 @@
 # (repo must be cloned into `~/.config/niri`)
 mkdir ~/.config/waybar
 ln -s ~/.config/niri/waybar-config.jsonc ~/.config/waybar/config.jsonc
+ln -s ~/.config/niri/waybar-style.css ~/.config/waybar/style.css
 
 # build deps
 sudo apt install -y fonts-font-awesome fonts-fork-awesome  # font dependency
