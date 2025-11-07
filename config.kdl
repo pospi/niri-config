@@ -55,15 +55,15 @@ layout {
     center-focused-column "never"
 
     preset-column-widths {
-        proportion 0.33333
-        proportion 0.5
         proportion 0.8
+        proportion 0.5
+        proportion 0.33333
+        proportion 1.0
     }
 
     preset-window-heights {
-        proportion 0.25
-        proportion 0.33333
         proportion 0.5
+        proportion 0.25
         proportion 0.8
         proportion 1.0
     }
@@ -164,6 +164,16 @@ window-rule {
     }
 }
 
+// Size terminal window width to 50% by default.
+// Affords easeful common workflow of launching 2 terminals side-by-side.
+// Also creates nice ratios between other visible windows with 80% width that
+// affords mouse-cursor-based application switching between terminal tangents
+// and originating application window.
+//
+window-rule {
+    match app-id=r#".*terminal.*"#
+    default-column-width { proportion 0.5; }
+}
 
 // small apps; floating windows
 window-rule {
