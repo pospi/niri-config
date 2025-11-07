@@ -1,12 +1,14 @@
 # Workstation configuration for [Niri](https://yalter.github.io/niri/) window manager
 
-A somatically & haptically informed window manager configuration to support an autonomic 2D spatial OS interface.
+A somatically, haptically & neurologically informed window manager configuration to support an autonomic 2D spatial OS interface.
 
 <p style="text-align: center"><strong>&mdash; or &mdash;</strong></p>
 
 "Turns your computer into a thinking box that you can drive like a Nintendo on even the lowest common denominator hardware available."
 
 *(Imagine it like you're spreading out thoughts on the floor.)*
+
+Great for ADHD sufferers, multitasking workflows, and those who struggle with unproductive tangenting.
 
 > You could bring that un-usably slow discarded Windows laptop back to life with these tools. I *guarantee* it will be a much faster & more pleasant machine to use than when it was Microsoft-tainted.
 
