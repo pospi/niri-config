@@ -8,6 +8,8 @@ A somatically & haptically informed window manager configuration to support an a
 
 *(Imagine it like you're spreading out thoughts on the floor.)*
 
+> You could bring that un-usably slow discarded Windows laptop back to life with these tools. I *guarantee* it will be a much faster & more pleasant machine to use than when it was Microsoft-tainted.
+
 ## Features & integrations
 
 - Ergonomically considered [keybindings](#keybindings) for maximum work efficiency:
