@@ -71,12 +71,13 @@ Holding `Mod` (or `Win`) activates window system interaction mode, and takes foc
     2. `Ctrl`+`Alt`+`Shift`+`arrow keys` = moves **columns** between **monitors**
     3. `Ctrl`+`Alt`+`Shift`+(`Page_Down`|`Page_Up`) = moves **rows** up/down *within* the same **monitor**
     4. `Ctrl`+`Alt`+`Shift`+(`Home`|`End`) = moves **rows** left/right *among* **monitors**
-4. `Mod`+`R` toggles focused **column** widths among presets
+3. `Mod`+`R` toggles focused **column** widths among presets
     - (`Mod`+`Shift`+`R` to go backwards)
-5. `Mod`+`E` toggles focused **window** heights among presets
+4. `Mod`+`E` toggles focused **window** heights among presets
     - (`Mod`+`Shift`+`E` to go backwards)
     - (`Mod`+`Ctrl`+`E` to reset to full height)
-3. `Mod`+(`[`|`]`) will split & shuffle stacked **windows** left/right between **columns** if there is space available
+5. `Mod`+(`[`|`]`) will split & shuffle stacked **windows** left/right between **columns** if there is space available
+6. `Mod`+`S` or `Mod`+`O` = zoom out to the desktop overview. Press again to return to standard view. Windows can be rearranged via the same keys as normal, or by clicking & dragging with the mouse.
 
 Use of the `scroll wheel` is alike `arrow keys`- i.e. it changes focus vertically between **rows**; and when combined with `Ctrl` changes focus horizontally between **columns**.
 
