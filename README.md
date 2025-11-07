@@ -104,7 +104,6 @@ There is a handy little script for owners of such machines that raises the CPU p
 
 ## To-do
 
-- Prevent suspend when media is playing
 - Get an app switcher working (see [here](https://github.com/Kiki-Bouba-Team/niri-switch/issues/14) and [here](https://github.com/isaksamsten/niriswitcher/issues/2)). Too much dependency hell on 22.04. For now, `niri-taskbar` is probably sufficient.
 
 ## License
