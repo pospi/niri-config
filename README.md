@@ -81,6 +81,8 @@ Holding `Mod` (or `Win`) activates window system interaction mode, and takes foc
 
 Use of the `scroll wheel` is alike `arrow keys`- i.e. it changes focus vertically between **rows**; and when combined with `Ctrl` changes focus horizontally between **columns**.
 
+On a touchpad, you can use three-finger drag to move around between **windows**; and four-finger drag to zoom out to the desktop overview.
+
 ## Installation
 
 First, clone this repository to the standard Niri config location:
