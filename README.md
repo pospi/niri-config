@@ -16,6 +16,7 @@ Great for ADHD sufferers, multitasking workflows, and those who struggle with un
 
 - Ergonomically considered [keybindings](#keybindings) for maximum work efficiency:
     - The arrow keys move things.
+    - Intuitive keychords allowing interactions to be composed and 'played' like notes on a synth.
     - Windows size horizontally to enable switching focus to one's previous task by wiggling the mouse pointer at the border between them.
     - All OS functionality is instantly (sub-200ms) accessible via one's (likely) most muscularly developed fingers.
     - Zoom in/out to overview with a single key chord, maintaining consistent navigation with regular zoomlevel.
