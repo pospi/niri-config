@@ -18,14 +18,15 @@
     ],
     "modules-right": [
         // "mpd",
-        "idle_inhibitor",
         "pulseaudio",
         "network",
-        "cpu",
-        "memory",
-        "power-profiles-daemon",
-        "temperature",
+        // "keyboard-state",
         "backlight",
+        "memory",
+        "cpu",
+        "temperature",
+        "power-profiles-daemon",
+        "idle_inhibitor",
         "battery",
         "battery#bat2",
         "clock",
@@ -99,12 +100,12 @@
         "critical-threshold": 80,
         // "format-critical": "{temperatureC}°C {icon}",
         "format": "{temperatureC}°C {icon}",
-        "format-icons": ["", "", ""]
+        "format-icons": ["☁", "🌥", "🌤", "🌣"]
     },
     "backlight": {
         // "device": "acpi_video1",
         "format": "{percent}% {icon}",
-        "format-icons": [""]
+        "format-icons": ["🔅", "🔆"]
     },
     "battery": {
         "states": {
@@ -137,11 +138,11 @@
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": "{ifname} via {gwaddr} ",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠",
+        "format-wifi": "{essid} ({signalStrength}%)",
+        "format-ethernet": "{ipaddr}/{cidr}",
+        "tooltip-format": "{ifname} via {gwaddr}",
+        "format-linked": "{ifname} (No IP)",
+        "format-disconnected": "Disconnected",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
     "pulseaudio": {
