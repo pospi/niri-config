@@ -76,6 +76,37 @@ esac
 ' | sudo tee /opt/swaylock.sh
 sudo chmod +x /opt/swaylock.sh
 
+# idle management command
+echo '
+#!/usr/bin/env bash
+
+isMediaPlaying() {
+  mediaStatus=$(pacmd list-sink-inputs | grep state: | cut -d " " -f 2)
+  if [[ $mediaStatus == *"RUNNING"* ]]; then
+    return 0
+  fi
+  return 1
+}
+
+startIdling() {
+  swayidle -w \
+    timeout 605 'niri msg action power-off-monitors' \
+    after-resume 'niri msg action power-on-monitors' \
+    timeout 606 'systemctl suspend -i' \
+    before-sleep '/opt/swaylock.sh immediate'
+}
+
+if isMediaPlaying; then
+  echo "Postpone lock: media is playing"
+  pkill swayidle
+  startIdling
+  exit 1
+fi
+
+startIdling
+' | sudo tee /opt/swayidle.sh
+sudo chmod +x /opt/swayidle.sh
+
 # integrate idle handling with systemd
 echo "[Unit]
 PartOf=graphical-session.target
@@ -83,7 +114,7 @@ After=graphical-session.target
 Requisite=graphical-session.target
 
 [Service]
-ExecStart=/usr/local/bin/swayidle -w timeout 605 'niri msg action power-off-monitors' timeout 606 'systemctl suspend -i' before-sleep '/opt/swaylock.sh immediate' after-resume 'niri msg action power-on-monitors'
+ExecStart=/opt/swayidle.sh
 Restart=on-failure" | tee "$HOME/.config/systemd/user/swayidle.service"
 systemctl --user daemon-reload
 systemctl --user add-wants niri.service swayidle.service
