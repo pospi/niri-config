@@ -6,6 +6,7 @@
 . util/paths.sh
 
 sudo apt install -y fish
+sudo apt install -j jq  # needed to parse PipeWire output for media checks
 
 pushd "$TEMPDIR"
 
@@ -77,14 +78,21 @@ esac
 sudo chmod +x /opt/swaylock.sh
 
 # idle management command
-echo '
-#!/usr/bin/env bash
+echo '#!/usr/bin/env bash
 
 isMediaPlaying() {
-  mediaStatus=$(pacmd list-sink-inputs | grep state: | cut -d " " -f 2)
-  if [[ $mediaStatus == *"RUNNING"* ]]; then
-    return 0
+  if [ -n $(which pw-dump) ]; then
+    mediaStatus=$(pw-dump | jq ".[] | .info.state" | grep running | head -n 1)
+    if [[ $mediaStatus == *"running"* ]]; then
+      return 0
+    fi
+  elif [ -n $(which pulseaudio) ]; then
+    mediaStatus=$(pacmd list-sink-inputs | grep state: | cut -d " " -f 2)
+    if [[ $mediaStatus == *"RUNNING"* ]]; then
+      return 0
+    fi
   fi
+
   return 1
 }
 
