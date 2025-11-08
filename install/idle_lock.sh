@@ -84,6 +84,7 @@ swayidle -w \
   timeout 605 "niri msg action power-off-monitors" \
   after-resume "niri msg action power-on-monitors" \
   timeout 606 /opt/swaysleep.sh \
+  timeout 610 "/opt/swaylock.sh" \
   before-sleep "/opt/swaylock.sh immediate"
 ' | sudo tee /opt/swayidle.sh
 sudo chmod +x /opt/swayidle.sh
