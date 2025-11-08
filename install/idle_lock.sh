@@ -80,6 +80,17 @@ sudo chmod +x /opt/swaylock.sh
 # idle management command
 echo '#!/usr/bin/env bash
 
+swayidle -w \
+  timeout 605 "niri msg action power-off-monitors" \
+  after-resume "niri msg action power-on-monitors" \
+  timeout 606 /opt/swaysleep.sh \
+  before-sleep "/opt/swaylock.sh immediate"
+' | sudo tee /opt/swayidle.sh
+sudo chmod +x /opt/swayidle.sh
+
+# script to postpone sleep if media is playing
+echo '#!/usr/bin/env bash
+
 isMediaPlaying() {
   if [ -n $(which pw-dump) ]; then
     mediaStatus=$(pw-dump | jq ".[] | .info.state" | grep running | head -n 1)
@@ -96,24 +107,17 @@ isMediaPlaying() {
   return 1
 }
 
-startIdling() {
-  swayidle -w \
-    timeout 605 'niri msg action power-off-monitors' \
-    after-resume 'niri msg action power-on-monitors' \
-    timeout 606 'systemctl suspend -i' \
-    before-sleep '/opt/swaylock.sh immediate'
-}
-
 if isMediaPlaying; then
   echo "Postpone lock: media is playing"
   pkill swayidle
-  startIdling
+  /opt/swayidle.sh
   exit 1
 fi
 
-startIdling
-' | sudo tee /opt/swayidle.sh
-sudo chmod +x /opt/swayidle.sh
+systemctl suspend -i
+
+' | sudo tee /opt/swaysleep.sh
+sudo chmod +x /opt/swaysleep.sh
 
 # integrate idle handling with systemd
 echo "[Unit]
