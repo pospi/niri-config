@@ -239,7 +239,7 @@ binds {
         spawn-sh "swaynag --background 3cfcdf --text 000000 --button-background 027571 --button-text FFFFFF --border 015b58 -y overlay -m 'Peripherals:' -Z 'Bluetooth' 'blueman-manager' -Z 'Audio' 'pavucontrol' -Z 'Video' 'wdisplays'";
     }
 
-    Mod+Ctrl+Pause hotkey-overlay-title="Suspend" {
+    Mod+Ctrl+Backspace hotkey-overlay-title="Suspend" {
         spawn-sh "swaynag -t warning -y overlay -m 'Do you really want to suspend?' -Z 'Suspend' 'systemctl suspend -i'";
     }
     Mod+Ctrl+Insert hotkey-overlay-title="Reboot" {
