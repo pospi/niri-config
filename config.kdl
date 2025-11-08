@@ -99,6 +99,7 @@ layout {
 
 spawn-at-startup "waybar"
 spawn-sh-at-startup "/usr/bin/ulauncher --hide-window 1"
+spawn-at-startup "niri-switch-daemon"
 spawn-at-startup "/usr/local/bin/mako"
 //spawn-at-startup "/usr/bin/swaybg -m fill -i '%h/Pictures/LakeSide.png'"
 spawn-at-startup "system76-scheduler-niri"  // hardware-specific process foregrounding helper
@@ -225,6 +226,7 @@ binds {
     Mod+O hotkey-overlay-title=null repeat=false { toggle-overview; }
 
     Alt+Tab repeat=false { spawn "niri-switch"; }
+    Alt+Shft+Tab { spawn "niri-switch" "--previous"; }
 
     Mod+Q repeat=false hotkey-overlay-title=null { close-window; }
     Alt+F4 repeat=false { close-window; }
