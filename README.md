@@ -106,10 +106,6 @@ On other releases you may not need some dependencies, and on other distros you w
 
 There is a handy little script for owners of such machines that raises the CPU priority of the foreground window for better power management. It's already configured as a start script in the configuration (it'll just fail silently if not present). See [`install/system76_hardware.sh`](./install/system76_hardware.sh) for details.
 
-## To-do
-
-- Get an app switcher working (see [here](https://github.com/Kiki-Bouba-Team/niri-switch/issues/14) and [here](https://github.com/isaksamsten/niriswitcher/issues/2)). Too much dependency hell on 22.04. For now, `niri-taskbar` is probably sufficient.
-
 ## License
 
 WTFPL
