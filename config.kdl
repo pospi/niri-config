@@ -226,7 +226,7 @@ binds {
     Mod+O hotkey-overlay-title=null repeat=false { toggle-overview; }
 
     Alt+Tab repeat=false { spawn "niri-switch"; }
-    Alt+Shft+Tab { spawn "niri-switch" "--previous"; }
+    Alt+Shift+Tab { spawn "niri-switch" "--previous"; }
 
     Mod+Q repeat=false hotkey-overlay-title=null { close-window; }
     Alt+F4 repeat=false { close-window; }
