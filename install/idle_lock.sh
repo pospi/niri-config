@@ -83,8 +83,7 @@ echo '#!/usr/bin/env bash
 swayidle -w \
   timeout 605 "niri msg action power-off-monitors" \
   after-resume "niri msg action power-on-monitors" \
-  timeout 606 /opt/swaysleep.sh \
-  timeout 610 "/opt/swaylock.sh" \
+  timeout 606 "/opt/swaysleep.sh" \
   before-sleep "/opt/swaylock.sh immediate"
 ' | sudo tee /opt/swayidle.sh
 sudo chmod +x /opt/swayidle.sh
@@ -109,9 +108,15 @@ isMediaPlaying() {
 }
 
 if isMediaPlaying; then
-  echo "Postpone lock: media is playing"
+  echo "Postpone sleep: media is playing"
+
+  # restart idle daemon timers...
   pkill swayidle
   /opt/swayidle.sh
+
+  # ...but always trigger workstation lock
+  /opt/swaylock.sh immediate
+
   exit 1
 fi
 
