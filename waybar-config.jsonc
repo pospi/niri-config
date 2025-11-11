@@ -10,21 +10,22 @@
     "modules-left": [
         "niri/workspaces",
         "cffi/niri-taskbar",
-        "niri/window",
-        "custom/media"
+        "cpu",
+        "memory",
+        "temperature",
+        "niri/window"
     ],
     "modules-center": [
         "sway/window"
     ],
     "modules-right": [
         // "mpd",
+        // "custom/media",
         "pulseaudio",
+        // "wireplumber",
         "network",
         // "keyboard-state",
         "backlight",
-        "memory",
-        "cpu",
-        "temperature",
         "power-profiles-daemon",
         "idle_inhibitor",
         "battery",
@@ -88,11 +89,27 @@
         "tooltip": false
     },
     "cpu": {
-        "format": "{usage}% ",
-        "tooltip": false
+      "format": "{usage}% {icon0}{icon1}{icon2}{icon3}{icon4}{icon5}{icon6}{icon7}",
+      "format-icons": [
+        "<span color='#1a8714'>▁</span>", // green
+        "<span color='#018fc6'>▂</span>", // blue
+        "<span color='#f8f8f2'>▃</span>", // white
+        "<span color='#f8f8f2'>▄</span>", // white
+        "<span color='#ffffa5'>▅</span>", // yellow
+        "<span color='#ffffa5'>▆</span>", // yellow
+        "<span color='#ff9977'>▇</span>", // orange
+        "<span color='#FF0000'>█</span>"  // red
+      ],
+      "states": {
+        "warning": 60,
+        "critical": 90
+      }
     },
     "memory": {
-        "format": "{}% "
+        "format": "{}% ",
+        "states": {
+          "critical": 95
+        }
     },
     "temperature": {
         // "thermal-zone": 2,
@@ -103,9 +120,13 @@
         "format-icons": ["☁", "🌥", "🌤", "🌣"]
     },
     "backlight": {
-        // "device": "acpi_video1",
-        "format": "{percent}% {icon}",
-        "format-icons": ["🔅", "🔆"]
+      "on-scroll-up": "brightnessctl --class=backlight set '1%+'",
+      "on-scroll-down": "brightnessctl --class=backlight set '1%-'",
+      "on-click": "brightnessctl --class=backlight set '50%'",
+      "scroll-step": "0.1",
+      // "device": "acpi_video1",
+      "format": "{percent}% {icon}",
+      "format-icons": ["🔅", "🔆"]
     },
     "battery": {
         "states": {
@@ -149,14 +170,14 @@
         // "scroll-step": 1, // %, can be a float
         "format": "{volume}% {icon} {format_source}",
         "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
+        "format-bluetooth-muted": "🔇 {icon} {format_source}",
+        "format-muted": "🔇 {format_source}",
         "format-source": "{volume}% ",
         "format-source-muted": "",
         "format-icons": {
             "headphone": "",
-            "hands-free": "",
-            "headset": "",
+            "hands-free": "🗣️",
+            "headset": "🎧",
             "phone": "",
             "portable": "",
             "car": "",
