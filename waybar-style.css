@@ -236,6 +236,10 @@ label:focus {
     background-color: #FC4323;
 }
 
+#tray > *:hover {
+  background: #F5ABB9;
+}
+
 #idle_inhibitor {
   margin-top: -2px;
 }
