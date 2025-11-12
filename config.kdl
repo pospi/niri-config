@@ -240,7 +240,7 @@ binds {
     Alt+F4 repeat=false { close-window; }
 
     Mod+Return hotkey-overlay-title="Open a terminal" { spawn "gnome-terminal"; }
-    Mod+D hotkey-overlay-title="Run an application" { spawn "ulauncher-toggle"; }
+    Mod+D hotkey-overlay-title="Run an application" { spawn-sh "gapplication launch io.ulauncher.Ulauncher"; }
     Mod+Ctrl+L hotkey-overlay-title="Lock the screen" { spawn "/opt/swaylock.sh"; }
 
     Mod+Ctrl+P hotkey-overlay-title="Peripherals" {
