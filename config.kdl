@@ -359,6 +359,7 @@ binds {
 
     // column positioning
     Mod+C { center-column; }
+    Mod+Space { center-column; }
     Mod+Ctrl+C { center-visible-columns; }
 
     // screen sizing
