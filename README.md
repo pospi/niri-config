@@ -104,6 +104,12 @@ Commands are provided as a reference, and presume a freshly installed system. Th
 
 On other releases you may not need some dependencies, and on other distros you will need to adapt to your preferred package manager. Ubuntu 24.04 is presumed as the default. See usage of the platform detection logic in `install/util/platform_flags.sh` throughout the various scripts for more info.
 
+### Helper scripts
+
+There are optionally some opinionated, (hopefully) useful userscripts that can be added to your `~/.local/bin` by running [`install/userscripts.sh`](./install/userscripts.sh).
+
+See the file header in each `./install/userscripts/*` for details and setup instructions.
+
 ### Scheduler for System76 hardware
 
 There is a handy little script for owners of such machines that raises the CPU priority of the foreground window for better power management. It's already configured as a start script in the configuration (it'll just fail silently if not present). See [`install/system76_hardware.sh`](./install/system76_hardware.sh) for details.
