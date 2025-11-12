@@ -12,6 +12,8 @@ Great for ADHD sufferers, multitasking workflows, and those who struggle with un
 
 > (You could bring that un-usably slow discarded Windows laptop back to life with these tools and a relatively quick & simple [Ubuntu Desktop](https://ubuntu.com/desktop) installation! I *guarantee* it will be a much faster & more pleasant machine to use than when it was Microsoft-tainted.)
 
+<img width="1920" height="1080" alt="A fullscreen screenshot of a single-screen computer desktop UI, with some tangenting windows sprawling out from the focused one both horizontally and vertically." title="This is just standard Niri, but this is what it looks like." src="https://github.com/user-attachments/assets/30c1f86a-87de-462e-bb37-28dc7794597a" />
+
 ## Features & integrations
 
 - Ergonomically considered [keybindings](#keybindings) for maximum work efficiency:
