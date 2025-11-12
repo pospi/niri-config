@@ -167,7 +167,7 @@ window-rule {
     }
 }
 
-// Size terminal & file browser windows width to 50% by default.
+// Size terminal windows width to 50% by default.
 // Affords easeful common workflow of launching management windows side-by-side.
 // Also creates nice ratios between other visible windows with 80% width that
 // affords mouse-cursor-based application switching between terminal tangents
@@ -176,6 +176,12 @@ window-rule {
 window-rule {
     match app-id=r#".*(terminal|Nautilus).*"#
     default-column-width { proportion 0.5; }
+}
+
+// Size file browser windows to 2/3 screen- larger than terminals due to column count
+window-rule {
+    match app-id=r#".*Nautilus.*"#
+    default-column-width { proportion 0.66666; }
 }
 
 // Size pomodoro timer small
