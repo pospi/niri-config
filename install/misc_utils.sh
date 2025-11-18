@@ -3,6 +3,8 @@
 # miscellaneous utilities
 #
 
+. util/platform_flags.sh
+
 # base rendering
 sudo apt install -y xdg-desktop-portal-gtk xdg-desktop-portal-gnome
 
@@ -18,8 +20,15 @@ sudo apt install -y swaybg
 # media playback
 sudo apt install -y playerctl
 
+# bluetooth fix backport for 24.04
+if [[ "$IS_2404" -eq 0 ]]; then
+  sudo add-apt-repository -y ppa:giner/bluez
+  sudo apt update
+fi
+
 # peripherals config utils
-sudo apt install -y wdisplays brightnessctl blueman pavucontrol
+sudo apt install -y wdisplays brightnessctl bluez pavucontrol
+cargo install bluetool
 sudo usermod -aG video $USER  # to allow brightnessctl setting
 
 # pomodoro timer
