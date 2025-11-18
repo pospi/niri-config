@@ -3,17 +3,6 @@
 # Wrapper script for various media SaaS providers to retrieve arbitrary
 # content & metadata for future playback.
 #
-# Configuration env vars:
-#   - COOKIEFILE_PATH (default `~/.cache/cookies.txt`)
-#     path to cookie export for authenticated downloads
-#     @see Firefox plugin https://github.com/rotemdan/ExportCookies
-#   - FETCH_MP3 (default `0`)-
-#     if `1`, download mp3 instead of opus or m4a
-#   - EXTRACT_YT_AUDIO (default `0`)-
-#     if `1`, audio will be extracted from YouTube video, and video discarded
-#   - IGNORE_DL_ERRORS (default `0`)-
-#     if `1`, artist / playlist downloads will continue if a track fails
-#
 # @depends on `ffmpeg` & Python modules being available on $PATH:
 #   - yt-dlp  (YouTube)
 #   - scdl    (SoundCloud)
@@ -29,6 +18,18 @@
 
 if [[ $# -ne 1 ]]; then
   echo "Please provide a media URL to download!"
+  echo ""
+  echo "Configuration vars:"
+  echo "   - FETCH_MP3 (default 0)-"
+  echo "     if 1, download mp3 instead of opus or m4a"
+  echo "   - EXTRACT_YT_AUDIO (default 0)-"
+  echo "     if 1, audio will be extracted from YouTube video, and video discarded"
+  echo "   - IGNORE_DL_ERRORS (default 0)-"
+  echo "     if 1, artist / playlist downloads will continue if a track fails"
+  echo "   - COOKIEFILE_PATH (default '~/.cache/cookies.txt')"
+  echo "     path to cookie export for authenticated downloads"
+  echo "     @see Firefox plugin https://github.com/rotemdan/ExportCookies"
+  echo ""
   exit 1
 fi
 
