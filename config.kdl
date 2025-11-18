@@ -250,7 +250,7 @@ binds {
     Mod+Ctrl+Backspace hotkey-overlay-title="Suspend" {
         spawn-sh "swaynag -t warning -y overlay -m 'Do you really want to suspend?' -Z 'Suspend' 'systemctl suspend -i'";
     }
-    Mod+Ctrl+Insert hotkey-overlay-title="Reboot" {
+    Mod+Ctrl+Backslash hotkey-overlay-title="Reboot" {
         spawn-sh "swaynag -t error -y overlay -m 'Do you really want to restart?' -Z 'Reboot now' 'systemctl reboot'";
     }
     Mod+Ctrl+Delete hotkey-overlay-title="Shutdown" {
