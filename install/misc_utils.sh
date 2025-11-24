@@ -27,7 +27,7 @@ if [[ "$IS_2404" -eq 0 ]]; then
 fi
 
 # peripherals config utils
-sudo apt install -y wdisplays brightnessctl bluez pavucontrol
+sudo apt install -y wdisplays brightnessctl bluez blueman pavucontrol
 cargo install bluetool
 sudo usermod -aG video $USER  # to allow brightnessctl setting
 
