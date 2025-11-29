@@ -35,7 +35,7 @@
     ],
     // Modules configuration
     "niri/workspaces": {
-        "format": "{icon}",
+        "format": "{value}",
         "format-icons": {
             // Named workspaces
             // (you need to configure them in niri)
