@@ -14,6 +14,22 @@ Great for ADHD sufferers, multitasking workflows, and those who struggle with un
 
 <img width="1920" height="1080" alt="A fullscreen screenshot of a single-screen computer desktop UI, with some tangenting windows sprawling out from the focused one both horizontally and vertically." title="This is just standard Niri, but this is what it looks like." src="https://github.com/user-attachments/assets/30c1f86a-87de-462e-bb37-28dc7794597a" />
 
+<!-- MarkdownTOC -->
+
+- [Theory](#theory)
+- [Features & integrations](#features--integrations)
+- [Keybindings](#keybindings)
+    - [Conceptual model](#conceptual-model)
+    - [Interaction design](#interaction-design)
+    - [Chords](#chords)
+- [Installation](#installation)
+    - [Helper scripts](#helper-scripts)
+    - [Scheduler for System76 hardware](#scheduler-for-system76-hardware)
+    - [To do](#to-do)
+- [License](#license)
+
+<!-- /MarkdownTOC -->
+
 ## Theory
 
 See [What does it mean to be a solarpunk cyborg?](https://pospi.spadgos.com/2025/11/24/what-does-it-mean-to-be-a-solarpunk-cyborg/)
