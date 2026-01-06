@@ -193,8 +193,15 @@ window-rule {
 
 // small apps; floating windows
 window-rule {
-    match app-id=r#"^(gnome-calculator|protonvpn-app|MEGAsync)$"#
+    match app-id=r#"^(gnome-calculator|protonvpn-app)$"#
     open-floating true
+}
+
+// position MEGAsync window near the system tray
+window-rule {
+  match app-id=r#"MEGAsync"#
+  open-floating true
+  default-floating-position x=0 y=0 relative-to="bottom-right"
 }
 
 // Open the Firefox & Waterfox picture-in-picture player as floating by default.
