@@ -5,6 +5,7 @@
 # [install extensions through settings UI:]
 #   - https://github.com/Ulauncher/ulauncher-emoji
 #   - https://github.com/wckd02/port-killer-ulauncher
+#   - https://github.com/zensoup/ulauncher-unicode
 #
 
 . util/paths.sh
