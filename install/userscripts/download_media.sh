@@ -8,9 +8,11 @@
 #   - scdl    (SoundCloud)
 #   - gamdl   (Apple Music)
 #   - spotdl  (Spotify)
+#   - tiddl   (Tidal)
 # To install them all, use https://pipx.pypa.io/ as follows:
 #   sudo apt install ffmpeg pipx   # (on Debian-based systems)
-#   pipx install yt-dlp scdl gamdl spotdl
+#   pipx install yt-dlp scdl gamdl spotdl tiddl
+# Tidal auth has its own setup: run `tiddl auth login` after installing.
 #
 # @author pospi <pospi@spadgos.com>
 # @since  2025-11-11
@@ -134,6 +136,17 @@ elif [[ "$1" == *"apple"* ]]; then
   )
 
   gamdl "${args[@]}" "$@"
+
+  skip_cleanup=$?
+
+#
+#-------------------------- Apple --------------------------
+#
+elif [[ "$1" == *"tidal"* ]]; then
+
+  progressfile="~/.cache/dl-progress-tidal.log"
+
+  tiddl url "$@" download
 
   skip_cleanup=$?
 
